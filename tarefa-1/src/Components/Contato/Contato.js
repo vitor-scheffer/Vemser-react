@@ -1,6 +1,12 @@
+import Form from './Form';
+
 const Contato = ({title}) => {
   return (
-    <h2>{title}</h2>
+    <section>
+      <h2>{title}</h2>
+      <Form />
+    </section>
+    
   )
 }
 

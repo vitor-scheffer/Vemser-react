@@ -9,6 +9,16 @@
   height: 9rem;
 }
 
+.card-lg {
+  margin: auto;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 1300px;
+  height: 34rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
 .section {
   display: flex;
   flex-direction: column;
@@ -21,6 +31,11 @@
   flex-direction: column;
   gap: 1rem;
   padding: 2rem 0;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
 }
 
 h2 {

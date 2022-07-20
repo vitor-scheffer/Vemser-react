@@ -1,0 +1,13 @@
+input, select, textarea {
+  padding-left: 0.5rem;
+  width: 20rem;
+  height: 2rem;
+}
+
+label {
+  padding-bottom: 0.5rem;
+}
+
+textarea {
+  height: 10rem;
+}
