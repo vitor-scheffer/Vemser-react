@@ -1,6 +1,15 @@
-const Sobre = () => {
+import Video from './Video';
+import Lorem from './Lorem';
+import styles from './Sobre.module.css';
+
+const Sobre = ({title}) => {
   return (
-    <h2>Sobre</h2>
+    <section className={styles.container}>
+      <h2>{title}</h2>
+      <Video />
+      <Lorem />
+    </section>
+    
   )
 }
 

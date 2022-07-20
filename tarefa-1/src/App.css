@@ -16,6 +16,13 @@
   max-width: 1300px;
 }
 
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
 h2 {
   text-align: center;
   padding: 2rem 0;

@@ -17,10 +17,10 @@ function App() {
         <Route exact path='/' element={<Home/>}>
           
         </Route>
-        <Route path='/sobre' element={<Sobre/>}>
+        <Route path='/sobre' element={<Sobre title='Sobre a DBC' />}>
          
         </Route>
-        <Route path='/contato' element={<Contato/>}>
+        <Route path='/contato' element={<Contato title='Contato' />}>
           
         </Route>
       </Routes>
