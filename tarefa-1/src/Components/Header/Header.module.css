@@ -1,16 +1,22 @@
-.container {
-  display: flex;
-  align-items: center;
+header {
   padding: 1rem 3rem;
   background-color: orangered;
   color: white;
-  box-sizing: border-box;
+  
+}
+ 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 1300px;
+  margin: auto;
 }
 
 img {
   padding: 0.5rem;
   background-color: white;
-  width: 3rem;
+  width: 2.5rem;
   margin-right: 1rem;
   clip-path: circle();
 }

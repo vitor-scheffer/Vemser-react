@@ -1,11 +1,15 @@
-.container {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  padding: 1rem 3rem;
+footer {
   background-color: orangered;
   color: white;
-  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1300px;
+  display: flex;
+  margin: auto;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 1rem;
 }
 
 footer ul {

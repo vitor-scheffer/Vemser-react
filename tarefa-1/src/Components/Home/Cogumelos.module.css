@@ -1,0 +1,11 @@
+.cogumelos {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+  gap: 3rem;
+}
+
+ .cogumelos img {
+  width: 5rem;
+  margin: 0;
+}
