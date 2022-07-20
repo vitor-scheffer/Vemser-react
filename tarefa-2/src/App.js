@@ -1,6 +1,9 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
 import './App.css';
+import Header from './components/Header'
+import Home from './components/Home'
+import Footer from './components/Footer'
 
 function App() {
   const Setup = async () => {
@@ -16,11 +19,13 @@ function App() {
   useEffect(() => {
     Setup()
   },[])
-  
+
   return (
-    <div>
-      
-    </div>
+    <>
+    <Header />
+    <Home />
+    <Footer />
+    </>
   );
 }
 
