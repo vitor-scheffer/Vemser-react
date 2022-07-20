@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding: 1rem 3rem;
+  background-color: orangered;
+  color: white;
+  box-sizing: border-box;
+}
+
+img {
+  padding: 0.5rem;
+  background-color: white;
+  width: 3rem;
+  margin-right: 1rem;
+  clip-path: circle();
+}

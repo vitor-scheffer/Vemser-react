@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 1rem 3rem;
+  background-color: orangered;
+  color: white;
+  box-sizing: border-box;
+}
+
+footer ul {
+  flex-direction: column;
+  padding-left: 0;
+}
