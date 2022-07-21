@@ -3,10 +3,14 @@ import { faUsers } from '@fortawesome/free-solid-svg-icons'
 import { faBuilding } from '@fortawesome/free-solid-svg-icons'
 import { faEarthAmericas } from '@fortawesome/free-solid-svg-icons'
 import {faCalendarDays} from '@fortawesome/free-solid-svg-icons'
+import moment from 'moment'
 
 import styles from './Home.module.css'
 
 const Bio = ({username, followers, following, job, bio, local, join }) => {
+
+
+ 
   return (
     <div className="card">
       <p>Username: {username}</p>
