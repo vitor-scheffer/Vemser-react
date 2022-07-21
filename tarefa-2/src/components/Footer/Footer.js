@@ -5,7 +5,7 @@ const Footer = ({user}) => {
   return (
     <footer className="container">
        <h1>&lt;/ {user.name}&gt;</h1>
-       <Socials />
+       <Socials link={user.html_url}/>
     </footer>
   )
 }

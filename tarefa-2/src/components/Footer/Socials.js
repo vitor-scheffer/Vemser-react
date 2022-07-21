@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import styles from './Socials.module.css'
 
-const Socials = () => {
+const Socials = ({link}) => {
+  const linkedin = 'https://www.linkedin.com/in/-vitorscheffer/'
   return (
     <div className={styles.icons}>
-      <FontAwesomeIcon icon={faGithub} />
-      <FontAwesomeIcon icon={faTwitter} />
+      <a href={link} target="_blank"><FontAwesomeIcon icon={faGithub} /></a>
+      <a href={linkedin} target="_blank"><FontAwesomeIcon icon={faLinkedin} /></a>
     </div>
   )
 }
