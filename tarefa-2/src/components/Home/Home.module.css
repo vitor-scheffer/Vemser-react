@@ -1,0 +1,51 @@
+img {
+  width: 12rem;
+  clip-path: circle();
+  margin-bottom: 2rem;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  color: white;
+}
+
+small {
+  color: white;
+}
+
+p:first-child {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.follows {
+  display: flex;
+  gap: 1rem;
+}
+
+.repos {
+  display: flex;
+  justify-content: space-between;
+}
+
+section svg {
+  color: var(--base-color);
+  padding-right: 0.5rem;
+  width: 1.5rem;
+}
+
+span {
+  color: var(--base-color);
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}

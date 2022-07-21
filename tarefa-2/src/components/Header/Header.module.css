@@ -1,0 +1,18 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background-color: black;
+  color: white;
+  height: 5rem;
+  border-bottom: 1px solid var(--base-color-dark);
+}
+
+header h1 {
+  color: var(--base-color);
+  font-size: 1.25rem;
+}
+
+header h1:hover {
+  cursor: pointer;
+}

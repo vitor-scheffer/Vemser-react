@@ -1,0 +1,30 @@
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  height: 5rem;
+  border-top: 1px solid var(--base-color-dark);
+}
+
+footer h1 {
+  color: var(--base-color);
+  font-size: 1.25rem;
+}
+
+footer h1:hover {
+  cursor: pointer;
+}
+
+footer svg {
+  color: var(--base-color);
+  font-size: 2rem;
+}
+
+footer svg:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+  transition: .5s;
+}
+
