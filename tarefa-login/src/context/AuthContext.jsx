@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import api from '../api'
+import apiDBC from '../Services/apiDBC'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
@@ -12,16 +12,32 @@ const AuthProvider = ({children}) => {
 
   const handleLogin = async (user) => {
     try{
-      const {data} = await api.post('/auth', user)
+      const {data} = await apiDBC.post('/auth', user)
       localStorage.setItem('token', data)
-      navigate('/usuarios')
+      navigate('/pessoa')
       setLogin(true)
     } catch(error){
       console.error(error)
     }
   }
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/')
+  }
+
+  const handleSignUp = async (user) => {
+    try {
+      await apiDBC.post('/auth/create', user)
+      alert('Usuário cadastrado com sucesso')
+      navigate('/')
+    } catch(error){
+      console.log(error)
+    }
+
+  }
   return (
-    <AuthContext.Provider value={{ handleLogin }}>
+    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp }}>
       {children}
     </AuthContext.Provider>
   )
