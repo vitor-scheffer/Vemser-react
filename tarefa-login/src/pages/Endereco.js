@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import apiCEP from '../Services/apiCEP'
+import  { IMaskInput }  from 'react-imask'
 
 
 
@@ -53,9 +54,10 @@ const Endereco = () => {
     <h1>Busque seu endereço</h1>
     <form style={{display: 'flex', flexDirection: 'column', width: '350px', gap:'5px'}}onSubmit={formik.handleSubmit}>
       <label htmlFor="cep">cep</label>
-      <input type="text"
+      <IMaskInput type="text"
       id="cep"
       name="cep"
+      mask="00000-000"
       onChange={formik.handleChange}
       onBlur={procuraCep}
       onKeyDown={zeraCampos} 
