@@ -3,6 +3,7 @@ import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup';
 import apiCEP from '../Services/apiCEP'
 import { AuthContext } from '../context/AuthContext';
+import { IMaskInput } from 'react-imask';
 
 
 
@@ -60,10 +61,18 @@ const Endereco = () => {
           <Form>
           <div>
             <label htmlFor="cep">Cep</label>
-            <Field id="cep" name="cep" type="text" onBlur={procuraCep}/>
-            {errors.cep && touched.cep ? (
-              <div>{errors.cep}</div>
-            ) : null }
+            <Field
+            name="cep" 
+            render={({ field }) => (
+              <IMaskInput
+              {...field}
+              mask="00000-000"
+              id="cep" 
+              type="text" 
+              onBlur={procuraCep}
+              />
+              )}
+          />  
           </div>
           <div>
             <label htmlFor="tipo">Tipo</label>
