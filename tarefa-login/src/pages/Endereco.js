@@ -37,17 +37,18 @@ const Endereco = () => {
       setBairro(data.bairro);
       setCidade(data.localidade);
       setEstado(data.uf);
+      formik.values.logradouro = rua
     } catch (error) {
       console.log(error)
     }
   }
 
   const zeraCampos = () => {
-    formik.values.logradouro = ''
+    setRua('');
+    setBairro('');
+    setCidade('');
+    setEstado('');
   }
-
-  // procuraCep(formik.values.cep)
-  
   
   return (
     <>
