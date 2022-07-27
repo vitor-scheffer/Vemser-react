@@ -56,13 +56,13 @@ const Endereco = () => {
     <form style={{display: 'flex', flexDirection: 'column', width: '350px', gap:'5px'}}onSubmit={formik.handleSubmit}>
       <label htmlFor="cep">cep</label>
       <IMaskInput type="text"
-      id="cep"
-      name="cep"
-      mask="00000-000"
-      onChange={formik.handleChange}
-      onBlur={procuraCep}
-      onKeyDown={zeraCampos} 
-      value={formik.values.cep}
+        id="cep"
+        name="cep"
+        mask="00000-000"
+        onChange={formik.handleChange}
+        onBlur={procuraCep}
+        onKeyDown={zeraCampos} 
+        value={formik.values.cep}
       />
       <label htmlFor="rua">Tipo</label>
       <select name="tipo" id="tipo" onBlur={formik.handleChange}>
@@ -72,52 +72,52 @@ const Endereco = () => {
       </select>
       <label htmlFor="rua">Rua</label>
       <input type="text"
-      id="rua"
-      name="rua"
-      onChange={formik.values.logradouro = rua}
-      value={rua}
+        id="rua"
+        name="rua"
+        onChange={formik.values.logradouro = rua}
+        value={rua}
       />
       <label htmlFor="rua">Número</label>
       <input type="text"
-      id="numero"
-      name="numero"
-      onChange={formik.handleChange}
-      value={formik.values.numero}
+        id="numero"
+        name="numero"
+        onChange={formik.handleChange}
+        value={formik.values.numero}
       />
       <label htmlFor="bairro">Bairro</label>
       <input type="text"
-      id="bairro"
-      name="bairro"
-      onChange={formik.values.bairro = bairro}
-      value={bairro}
+        id="bairro"
+        name="bairro"
+        onChange={formik.values.bairro = bairro}
+        value={bairro}
       />
       <label htmlFor="cidade">Cidade</label>
       <input type="text"
-      id="cidade"
-      name="cidade"
-      onChange={formik.values.cidade = cidade}
-      value={cidade}
+        id="cidade"
+        name="cidade"
+        onChange={formik.values.cidade = cidade}
+        value={cidade}
       />
       <label htmlFor="estado">Estado</label>
       <input type="text"
-      id="estado"
-      name="estado"
-      onChange={formik.values.estado = estado}
-      value={estado}
+        id="estado"
+        name="estado"
+        onChange={formik.values.estado = estado}
+        value={estado}
       />
       <label htmlFor="pais">País</label>
       <input type="text"
-      id="pais"
-      name="pais"
-      onChange={formik.handleChange}
-      value={formik.values.pais}
+        id="pais"
+        name="pais"
+        onChange={formik.handleChange}
+        value={formik.values.pais}
       />
       <label htmlFor="complemento">Complemento</label>
       <input type="text"
-      id="complemento"
-      name="complemento"
-      onChange={formik.handleChange}
-      value={formik.values.complemento}
+        id="complemento"
+        name="complemento"
+        onChange={formik.handleChange}
+        value={formik.values.complemento}
       />
       
       <button type="submit">Cadastrar</button>

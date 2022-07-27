@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
+import { AuthProvider, AuthContext } from './context/AuthContext'
+import { useContext } from 'react'
 import Login from './pages/Login'
 import Users from './pages/Users'
 import Endereco from './pages/Endereco'
@@ -9,15 +10,24 @@ import Footer from './components/Footer/Footer'
 
 
 const Routers = () => {
+  const { auth } = useContext(AuthContext)
   return (
     <BrowserRouter>
       <AuthProvider>
         <Header />
         <Routes>
-          <Route exact path="/" element={<Login />}></Route>
-          <Route path="/usuarios" element={<Users />}></Route>
-          <Route path="/endereco" element={<Endereco />}></Route>
-          <Route path="/pessoa" element={<Pessoa />}></Route>
+          {!auth ? (
+            <>
+              <Route exact path="/" element={<Login />}></Route>
+              <Route path="/usuarios" element={<Users />}></Route>
+            </>
+            ): (
+            <>
+              <Route path="/endereco" element={<Endereco />}></Route>
+              <Route path="/pessoa" element={<Pessoa />}></Route>
+            </>
+            )
+          }
         </Routes>
         <Footer />
       </AuthProvider>

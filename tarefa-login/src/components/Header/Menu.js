@@ -4,18 +4,11 @@ import { AuthContext } from '../../context/AuthContext'
 import Item from './Item'
 
 const Menu = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem('token');
-  useEffect (() => {
-    if(!token) {
-      navigate ('/')
-    }
-  },[])
-  const { handleLogout } = useContext(AuthContext)
+  const {auth, handleLogout} = useContext(AuthContext)
   return (
     <nav>
       <ul>
-        {!token ? (
+        {!auth ? (
           <>
           <Item name="Login" url="/"/>
           <Item name="Cadastre-se" url="/usuarios"/>
@@ -29,8 +22,7 @@ const Menu = () => {
         )
       }
       </ul>
-      {token && <button onClick={handleLogout}>Sair</button> }
-
+      {auth && <button onClick={handleLogout}>Sair</button> }
     </nav>
   )
 }

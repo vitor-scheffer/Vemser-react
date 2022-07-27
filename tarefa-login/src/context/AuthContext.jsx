@@ -1,21 +1,29 @@
 import { createContext } from "react";
 import apiDBC from '../Services/apiDBC'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
-  const [login, setLogin] = useState(false)
+  const [auth, setAuth] = useState(false)
+  const [loading, setLoading] = useState(true)
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if(token) {
+      apiDBC.defaults.headers.common['Authorization'] = token;
+      setAuth(true)
+    }
+    setLoading(false);
+  },[])
 
   const handleLogin = async (user) => {
     try{
       const {data} = await apiDBC.post('/auth', user)
       localStorage.setItem('token', data)
-      navigate('/pessoa')
-      setLogin(true)
+      apiDBC.defaults.headers.common['Authorization'] = data;
+      setAuth(true)
+      window.location.href = '/pessoa'
     } catch(error){
       console.error(error)
     }
@@ -23,21 +31,28 @@ const AuthProvider = ({children}) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
-    navigate('/')
+    apiDBC.defaults.headers.common['Authorization'] = undefined;
+    setAuth(false);
+    window.location.href = '/';
   }
 
   const handleSignUp = async (user) => {
     try {
       await apiDBC.post('/auth/create', user)
       alert('Usuário cadastrado com sucesso')
-      navigate('/')
+      window.location.href = '/';
     } catch(error){
       console.log(error)
     }
+  }
 
+  if(loading) {
+    return (
+      <div>Loading</div>
+    )
   }
   return (
-    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp }}>
+    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp, auth }}>
       {children}
     </AuthContext.Provider>
   )
