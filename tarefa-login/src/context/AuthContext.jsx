@@ -34,7 +34,14 @@ const AuthProvider = ({children}) => {
     } catch(error){
       console.log(error)
     }
+  }
 
+  const handleEndereco = async (end) => {
+    try{
+      await apiDBC.post('endereco/create', end)
+    } catch(error){
+      console.log(error)
+    }
   }
   return (
     <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp }}>
