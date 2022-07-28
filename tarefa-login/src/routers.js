@@ -7,6 +7,7 @@ import Endereco from './pages/Endereco'
 import Pessoa from './pages/Pessoa'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
+import NotFound from './components/NotFound/NotFound'
 
 
 const Routers = () => {
@@ -25,6 +26,7 @@ const Routers = () => {
             <>
               <Route path="/endereco" element={<Endereco />}></Route>
               <Route path="/pessoa" element={<Pessoa />}></Route>
+              <Route path="*" element={<NotFound />}></Route>
             </>
             )
           }

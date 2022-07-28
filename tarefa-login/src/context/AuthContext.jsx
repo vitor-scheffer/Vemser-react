@@ -1,6 +1,6 @@
+import { useState, useEffect } from 'react'
 import { createContext } from "react";
 import apiDBC from '../Services/apiDBC'
-import { useState, useEffect } from 'react'
 
 const AuthContext = createContext();
 
@@ -48,7 +48,7 @@ const AuthProvider = ({children}) => {
 
   if(loading) {
     return (
-      <div>Loading</div>
+      <h1>Loading</h1>
     )
   }
   return (

@@ -8,10 +8,11 @@ const Pessoa = () => {
   const navigate = useNavigate()
   const [pessoas, setPessoas] = useState([])
   const [isUpdate, setIsUpdate] = useState(false)
+  const [id, setId] = useState()
 
   const setUpdate = (id) => {
     setIsUpdate(true)
-    // setFieldValue(values.idPessoa = `${id}`)
+    setId(id)
   }
 
   const setup = async () => {
@@ -33,14 +34,13 @@ const Pessoa = () => {
     }
   }
 
-  const handleUpdate = async (idPessoa, newPeople) => {
-    console.log(idPessoa)
+  const handleUpdate = async (newPeople) => {
+    let idPessoa = id
     try {
-      const { data } = await apiDBC.put(`/pessoa?pagina=0&tamanhoDasPaginas=20/${idPessoa}`, newPeople)
+      const { data } = await apiDBC.put(`/pessoa/${idPessoa}`, newPeople)
       console.log('editou')
-      setup()
-      // modalconfirm
       setIsUpdate(false)
+      setup()
     } catch (error) {
       console.log(error)
     }
@@ -72,13 +72,13 @@ const Pessoa = () => {
           dataNascimento: '',
           cpf: '',
           email: '',
-          idPessoa: ''
         }}
         onSubmit={values => {
-          {isUpdate ? handleUpdate(values.idPessoa, values) : handleRegister(values) }
+          {isUpdate ? handleUpdate(values) : handleRegister(values) }
         }}
       >
-        <Form>
+        {({errors, setFieldValue }) =>(
+          <Form>
           <h1>{isUpdate ? 'Atualizar pessoa' : 'Cadastrar pessoa'}</h1>
           <div>
             <label htmlFor="nome">Nome:</label>
@@ -101,7 +101,9 @@ const Pessoa = () => {
           </div>
           <button type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</button>
         </Form>
+        )}
       </Formik>
+
       {pessoas.map(pessoa =>(
         <div key={pessoa.idPessoas}>
           <p>Nome: {pessoa.nome}</p>
