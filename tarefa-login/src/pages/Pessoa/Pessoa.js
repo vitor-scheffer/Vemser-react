@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import apiDBC from '../Services/apiDBC'
+import apiDBC from '../../Services/apiDBC'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
-import { useNavigate } from 'react-router-dom'
 import { ContainerPessoa, CardColabs } from './Pessoa.styled';
+import Modal from '../../Utils/Modal'
 
 const Pessoa = () => {
-  const navigate = useNavigate()
   const [pessoas, setPessoas] = useState([])
   const [isUpdate, setIsUpdate] = useState(false)
   const [id, setId] = useState()
@@ -14,6 +13,7 @@ const Pessoa = () => {
   const [data, setData] = useState()
   const [cpf, setCpf] = useState()
   const [email, setEmail] = useState()
+  const [openModal, setOpenModal] = useState(false)
 
   const setUpdate = (pessoa) => {
     setIsUpdate(true)
@@ -22,6 +22,11 @@ const Pessoa = () => {
     setData(pessoa.dataNascimento)
     setCpf(pessoa.cpf)
     setEmail(pessoa.email)
+  }
+
+  const setDelete = (id) => {
+    setId(id)
+    setOpenModal(true)
   }
 
   const setValues = (setFieldValue) => {
@@ -54,7 +59,7 @@ const Pessoa = () => {
     let idPessoa = id
     try {
       const { data } = await apiDBC.put(`/pessoa/${idPessoa}`, newPeople)
-      console.log('editou')
+      alert('editado com sucesso')
       setIsUpdate(false)
       setup()
     } catch (error) {
@@ -62,11 +67,12 @@ const Pessoa = () => {
     }
   }
 
-  const handleDelete = async (idPessoa) => {
+  const handleDelete = async () => {
+    let idPessoa = id
     try {
       await apiDBC.delete(`/pessoa/${idPessoa}`)
-      console.log('apagou')
       alert('deletado')
+      setOpenModal(false)
       setup()
     } catch (error) {
       console.log(error)
@@ -81,7 +87,7 @@ const Pessoa = () => {
 
   return (
     <ContainerPessoa>
-      <h1>Pessoas</h1>
+      <h1>Tickets</h1>
       <Formik
         initialValues={{
           nome: '',
@@ -89,8 +95,9 @@ const Pessoa = () => {
           cpf: '',
           email: '',
         }}
-        onSubmit={values => {
+        onSubmit={(values, {resetForm}) => {
           {isUpdate ? handleUpdate(values) : handleRegister(values) }
+          resetForm()
         }}
       >
         {({errors, setFieldValue }) =>(
@@ -129,7 +136,8 @@ const Pessoa = () => {
             <p>Cpf: {pessoa.cpf}</p>
             <p>E-mail: {pessoa.email}</p>
             <button onClick={() => {setUpdate(pessoa)}}>Editar</button> 
-            <button onClick={() => {handleDelete(pessoa.idPessoa)}}>Apagar</button>
+            <button onClick={() => {setDelete(pessoa.idPessoa)}}>Apagar</button>
+            {openModal && <Modal closeModal={setOpenModal} confirmModal={handleDelete}/>}
           </div>
         
       ))}

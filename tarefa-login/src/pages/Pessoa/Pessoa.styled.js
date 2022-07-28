@@ -70,15 +70,6 @@ export const CardColabs = styled.div`
     border-radius: 8px;
     margin: 32px 0;
 
-    div {
-      display: flex;
-      width: 100%;
-      padding: 11px;
-      justify-content: space-between;
-      border-top: 1.5px solid #DFE0EB;
-      border-bottom: 1.5px solid #DFE0EB;
-    };
-
     h2 {
       padding-left: 32px;
     };
@@ -91,6 +82,11 @@ export const CardColabs = styled.div`
     padding: 15px 0;
     width: 65px;
     };
+
+    button:hover {
+      cursor: pointer;
+      background-color: #243cdb;
+    }
 
     p {
       width: 250px;
