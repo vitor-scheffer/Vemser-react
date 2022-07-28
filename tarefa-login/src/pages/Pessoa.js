@@ -3,16 +3,32 @@ import apiDBC from '../Services/apiDBC'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { ContainerPessoa, CardColabs } from './Pessoa.styled';
 
 const Pessoa = () => {
   const navigate = useNavigate()
   const [pessoas, setPessoas] = useState([])
   const [isUpdate, setIsUpdate] = useState(false)
   const [id, setId] = useState()
+  const [nome, setNome] = useState()
+  const [data, setData] = useState()
+  const [cpf, setCpf] = useState()
+  const [email, setEmail] = useState()
 
-  const setUpdate = (id) => {
+  const setUpdate = (pessoa) => {
     setIsUpdate(true)
-    setId(id)
+    setId(pessoa.idPessoa)
+    setNome(pessoa.nome)
+    setData(pessoa.dataNascimento)
+    setCpf(pessoa.cpf)
+    setEmail(pessoa.email)
+  }
+
+  const setValues = (setFieldValue) => {
+    setFieldValue('nome', nome)
+    setFieldValue('dataNascimento', data)
+    setFieldValue('cpf', cpf)
+    setFieldValue('email', email)
   }
 
   const setup = async () => {
@@ -64,7 +80,7 @@ const Pessoa = () => {
   },[])
 
   return (
-    <div>
+    <ContainerPessoa>
       <h1>Pessoas</h1>
       <Formik
         initialValues={{
@@ -79,10 +95,10 @@ const Pessoa = () => {
       >
         {({errors, setFieldValue }) =>(
           <Form>
-          <h1>{isUpdate ? 'Atualizar pessoa' : 'Cadastrar pessoa'}</h1>
+          <h2>{isUpdate ? 'Atualizar pessoa' : 'Cadastrar pessoa'}</h2>
           <div>
             <label htmlFor="nome">Nome:</label>
-            <Field id="nome" name="nome"/>
+            <Field onClick={ isUpdate ? () => setValues(setFieldValue) : ''} id="nome" name="nome"/>
 
           </div>
           <div>
@@ -104,17 +120,21 @@ const Pessoa = () => {
         )}
       </Formik>
 
+      <CardColabs>
+        <h2>All tickets</h2>
       {pessoas.map(pessoa =>(
-        <div key={pessoa.idPessoas}>
-          <p>Nome: {pessoa.nome}</p>
-          <p>Data de Nascimento: {pessoa.dataNascimento}</p>
-          <p>Cpf: {pessoa.cpf}</p>
-          <p>E-mail: {pessoa.email}</p>
-          <button onClick={() => {setUpdate(pessoa.idPessoa)}}>Editar</button> 
-          <button onClick={() => {handleDelete(pessoa.idPessoa)}}>Apagar</button>
-        </div>
+          <div key={pessoa.idPessoas}>
+            <p>Nome: {pessoa.nome}</p>
+            <p>Data de Nascimento: {pessoa.dataNascimento}</p>
+            <p>Cpf: {pessoa.cpf}</p>
+            <p>E-mail: {pessoa.email}</p>
+            <button onClick={() => {setUpdate(pessoa)}}>Editar</button> 
+            <button onClick={() => {handleDelete(pessoa.idPessoa)}}>Apagar</button>
+          </div>
+        
       ))}
-    </div>
+      </CardColabs>
+    </ContainerPessoa>
   )
 }
 export default Pessoa
