@@ -8,7 +8,6 @@ export const ContainerPessoa = styled.div`
 
   h1 {
     align-self: start;
-    padding-left: 30px;
   }
 
   form {

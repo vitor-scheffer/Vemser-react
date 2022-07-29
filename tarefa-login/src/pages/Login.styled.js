@@ -1,44 +1,30 @@
 import styled from "styled-components";
+import { colorSecondary, colorPrimaryDark } from '../consts'
 
 export const ContainerLogin = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #363740;
+  background: ${colorSecondary};
 
-  form {
-    display: flex;
-    flex-direction: column;
-    padding: 40px 32px;
-    gap: 24px;
-    border-radius: 8px;
-    background-color: white;
-  };
-
-  h1 {
-    font-size: 24px;
-  };
-
-  button {
-    color: white;
-    background-color: #3751FF;
-    border: 1px solid #3751FF;
-    border-radius: 8px;
-    padding: 15px 0;
-  };
-
-  button:hover {
-    cursor: pointer;
-    background-color: #243cdb;
+  a {
+    text-decoration: none;
+    padding-left: 5px;
   }
 
-  label {
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 15px;
-    color: #9FA2B4;
-  };
+  Form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 48px;
+    margin-bottom: 32px;
+  }
+
+  Form div {
+    display: flex;
+    flex-direction: column;
+  }
 
   input {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -54,5 +40,4 @@ export const ContainerLogin = styled.div`
     letter-spacing: 0.3px;
     opacity: 0.4;
   }
-  
 `;
