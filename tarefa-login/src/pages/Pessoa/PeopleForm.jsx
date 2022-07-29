@@ -10,6 +10,7 @@ import { Card } from '../../components/Card/Card'
 import { Button } from '../../components/Button/Button'
 import { Section } from '../../components/Section/Section'
 import  { IMaskInput }  from 'react-imask'
+import moment from 'moment'
 
 const userSchema = Yup.object().shape({
   nome: Yup.string().required('Campo obrigatório.'),
@@ -17,6 +18,8 @@ const userSchema = Yup.object().shape({
   cpf: Yup.string().required('Campo obrigatório.'),
   email: Yup.string().required('Campo obrigatório.'),
 })
+
+
 
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
@@ -39,6 +42,7 @@ const PeopleForm = () => {
 
   useEffect(() => {
     setup()
+
   },[]) 
 
   if (people || !isUpdate) {
@@ -49,14 +53,14 @@ const PeopleForm = () => {
       <Formik
           initialValues={{
             nome: isUpdate ? people.nome : '',
-            dataNascimento: isUpdate ? people.dataNascimento : '',
+            dataNascimento: isUpdate ? moment(people.dataNascimento, 'YY/YY/MMDD').format('YYYY-MM-DD') : '',
             cpf: isUpdate ? people.cpf : '',
             email: isUpdate ? people.email : '',
           }}
           validationSchema={userSchema}
           onSubmit={(values, {resetForm}) => {          
-            values.cpf = values.cpf.replaceAll('.','')
-            values.cpf= values.cpf.replaceAll('-','')
+            values.cpf = values.cpf.replace(/[^0-9]/gi,'')
+            values.dataNascimento = moment(values.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD')
             {isUpdate ? handleUpdate(values, id, setup, setIsUpdate) : handleRegister(values, setup) }
             resetForm()
           }}
@@ -73,25 +77,32 @@ const PeopleForm = () => {
             </div>
             <div>
               <label htmlFor="dataNascimento">Data de Nascimento:</label>
-              <IMaskInput
-                type="date"
-                name="dataNascimento"
-                id="dataNascimento"
-                onChange={handleChange}
-                />
+              <Field
+              name="dataNascimento"
+              render= {({field}) => (
+                <IMaskInput
+                {...field}
+                id="dataNascimento" 
+                mask="00/00/0000"
+                /> 
+                )}
+              />
                 {errors.dataNascimento && touched.dataNascimento ? (
              <div>{errors.dataNascimento}</div>
            ) : null}
             </div>
             <div>
               <label htmlFor="cpf">Cpf:</label>
-              <IMaskInput
-                type="text"
-                name="cpf"
-                id="cpf"
+              <Field
+              name="cpf"
+              render= {({field}) => (
+                <IMaskInput
+                {...field}
+                id="cpf" 
                 mask="000.000.000-00"
-                onChange={handleChange}
-                />
+                /> 
+                )}
+              />
                 {errors.cpf && touched.cpf ? (
              <div>{errors.cpf}</div>
            ) : null}

@@ -11,7 +11,7 @@ export const Lista = styled.ul(({}) => ({
 
 export const Item = styled.li(({}) => ({
   display: 'flex',
-  justifyContent: 'spaceBetween',
+  justifyContent: 'space-between',
   width: '100%',
   paddingLeft: 32,
   paddingRight: 32,
