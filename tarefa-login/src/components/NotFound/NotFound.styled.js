@@ -19,4 +19,5 @@ export const TitleNotFound = styled.h1`
   background-color: black;
   color: white;
   margin: 0;
+  padding: 30px;
 `;

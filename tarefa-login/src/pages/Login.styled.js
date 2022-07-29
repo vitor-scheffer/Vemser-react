@@ -26,18 +26,10 @@ export const ContainerLogin = styled.div`
     flex-direction: column;
   }
 
-  input {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    background-color: #FCFDFE;
-    border: 1px solid #DFE0EB;
-    padding: 11px 16px;
-    border-radius: 8px;
-  };
-
   input::placeholder {
-    color: #4B506D;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-    opacity: 0.4;
-  }
+  color: #4B506D;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  opacity: 0.4;
+}
 `;

@@ -2,6 +2,8 @@ import apiDBC from "../../Services/apiDBC"
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Modal from '../../Utils/Modal'
+import { Button } from '../Button/Button'
+import { Lista, Item } from './Lista'
 
 const FlasList = ({list, setup}) => {
   const navigate = useNavigate()
@@ -33,17 +35,20 @@ const FlasList = ({list, setup}) => {
   return (
       <div>
         <h2>All tickets</h2>
-      {list.map(item =>(
-          <div key={item.idPessoa}>
-            <p>Nome: {item.nome}</p>
-            <p>Data de Nascimento: {item.dataNascimento}</p>
-            <p>Cpf: {item.cpf}</p>
-            <p>E-mail: {item.email}</p>
-            <button onClick={() => {handleUpdate(item.idPessoa)}}>Editar</button> 
-            <button onClick={() => {setDelete(item.idPessoa)}}>Apagar</button>
-            {openModal && <Modal closeModal={setOpenModal} confirmModal={handleDelete}/>}
-          </div>
-      ))}
+        <Lista>
+          {list.map(item =>(
+            <Item key={item.idPessoa}>
+              <Item>{item.nome}</Item>
+              <Item>{item.dataNascimento}</Item>
+              <Item>{item.cpf}</Item>
+              <Item>{item.email}</Item>
+              <Button width="80px" onClick={() => {handleUpdate(item.idPessoa)}}>Editar</Button>
+              <Button width="80px" onClick={() => {setDelete(item.idPessoa)}}>Apagar</Button>
+              {openModal && <Modal closeModal={setOpenModal} confirmModal={handleDelete}/>}
+            </Item>
+          ))} 
+        </Lista>
+     
       </div>
   )
 }

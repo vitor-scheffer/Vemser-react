@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import apiDBC from '../../Services/apiDBC'
 import FlatList from '../../components/FlatList/FlatList'
 import { useNavigate } from 'react-router-dom'
+import NavBarLeft from '../../components/NavBar/NavBar';
+import { Card } from '../../components/Card/Card'
+import { Button } from '../../components/Button/Button'
+import { Section } from '../../components/Section/Section'
 
 const People = () => {
   const navigate = useNavigate()
@@ -25,17 +29,18 @@ const People = () => {
   },[])
 
   return (
-    <div>
+    <Section>
+      <NavBarLeft />
+      <Card width="1122px" height="100%">
       <h1>Tickets</h1>
       
       <div>
-        <button onClick={handleCreate}>Cadastrar</button>
+        <Button onClick={handleCreate}>Cadastrar</Button>
         <h1>Pessoas</h1>
         <FlatList list={pessoas} setup={setup}/>
       </div>
-
-      
-    </div>
+      </Card>
+    </Section>
   )
 }
 export default People

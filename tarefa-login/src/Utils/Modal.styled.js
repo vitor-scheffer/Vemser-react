@@ -16,14 +16,11 @@ export const ModalPeople = styled.div`
   h1 {
     font-size: 28px;
     width: 100%;
+    padding-top: 35px;
   }
 
   p {
     width: 100%;
     font-size: 25px;
-  }
-
-  button {
-    width: 135px;
   }
 `;

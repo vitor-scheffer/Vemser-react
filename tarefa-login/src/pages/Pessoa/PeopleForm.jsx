@@ -5,6 +5,10 @@ import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import { PeopleContext } from '../../context/PeopleContext'
 import { useContext } from 'react'
+import NavBarLeft from '../../components/NavBar/NavBar'
+import { Card } from '../../components/Card/Card'
+import {Button} from '../../components/Button/Button'
+import { Section } from '../../components/Section/Section'
 
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
@@ -32,6 +36,9 @@ const PeopleForm = () => {
 
   if (people || !isUpdate) {
     return (
+      <Section>
+      <NavBarLeft />
+      <Card>
       <Formik
           initialValues={{
             nome: isUpdate ? people.nome : '',
@@ -54,8 +61,7 @@ const PeopleForm = () => {
             </div>
             <div>
               <label htmlFor="dataNascimento">Data de Nascimento:</label>
-              <Field id="dataNascimento" name="dataNascimento"/>
-  
+              <Field id="dataNascimento" name="dataNascimento" type="date"/>
             </div>
             <div>
               <label htmlFor="cpf">Cpf:</label>
@@ -66,10 +72,12 @@ const PeopleForm = () => {
               <label htmlFor="email">E-mail:</label>
               <Field id="email" name="email"/>
             </div>
-            <button type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</button>
+            <Button type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
           </Form>
           )}
         </Formik>
+      </Card>
+      </Section>
     )
   }
 }
