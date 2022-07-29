@@ -5,25 +5,16 @@ import Item from './Item'
 import { Button } from '../Button/Button'
 
 const Menu = () => {
-  const {auth, handleLogout} = useContext(AuthContext)
+  const {handleLogout} = useContext(AuthContext)
   return (
     <>
     <nav>
       <ul>
-        {!auth ? (
-          <>
-          </>
-        )
-        : (
-          <>
           <Item name="Endereço" url="/endereco"/>
           <Item name="Pessoa" url="/pessoa"/>
-          </>
-        )
-      }
       </ul>
     </nav>
-    {auth && <Button onClick={handleLogout}>Sair</Button> }
+    <Button onClick={handleLogout}>Sair</Button>
     </>
      
   )

@@ -7,10 +7,9 @@ import { PeopleContext } from '../../context/PeopleContext'
 import { useContext } from 'react'
 import NavBarLeft from '../../components/NavBar/NavBar'
 import { Card } from '../../components/Card/Card'
-import {Button} from '../../components/Button/Button'
+import { Button } from '../../components/Button/Button'
 import { Section } from '../../components/Section/Section'
 import  { IMaskInput }  from 'react-imask'
-import moment from 'moment'
 
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
@@ -18,7 +17,7 @@ const PeopleForm = () => {
   const { id } = useParams();
   const [people, setPeople] = useState();
   const [isUpdate, setIsUpdate] = useState(false);
-
+  
   const setup = async () => {
     if (id) {
       setIsUpdate(true)
@@ -33,13 +32,7 @@ const PeopleForm = () => {
 
   useEffect(() => {
     setup()
-  },[])
-
-  const setCpf = (value) => {
-    console.log(value)
-  }
-
-  console.log(new Date())
+  },[]) 
 
   if (people || !isUpdate) {
     return (
@@ -66,7 +59,6 @@ const PeopleForm = () => {
             <div>
               <label htmlFor="nome">Nome:</label>
               <Field id="nome" name="nome"/>
-  
             </div>
             <div>
               <label htmlFor="dataNascimento">Data de Nascimento:</label>
@@ -74,7 +66,6 @@ const PeopleForm = () => {
                 type="date"
                 name="dataNascimento"
                 id="dataNascimento"
-                
                 onChange={handleChange}
                 />
             </div>

@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Modal from '../../Utils/Modal'
 import { Button } from '../Button/Button'
 import { Lista, Item } from './Lista'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FlasList = ({list, setup}) => {
   const navigate = useNavigate()
@@ -16,12 +18,13 @@ const FlasList = ({list, setup}) => {
   }
 
   const handleDelete = async () => {
+    const notify = () => toast("Usuário apagado com sucesso!");
     let idPessoa = id
     try {
       await apiDBC.delete(`/pessoa/${idPessoa}`)
-      alert('deletado')
       setOpenModal(false)
       setup()
+      notify()
     } catch (error) {
       console.log(error)
     }
@@ -48,7 +51,7 @@ const FlasList = ({list, setup}) => {
             </Item>
           ))} 
         </Lista>
-     
+        <ToastContainer />
       </div>
   )
 }

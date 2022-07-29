@@ -1,39 +1,45 @@
 import { useState, useEffect } from 'react'
 import { createContext } from "react";
 import apiDBC from '../Services/apiDBC'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
-  const [auth, setAuth] = useState(false)
+  const [token, setToken] = useState(false)
   const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const token = localStorage.getItem('token')
     if(token) {
       apiDBC.defaults.headers.common['Authorization'] = token;
-      setAuth(true)
+      setToken(token)
     }
     setLoading(false);
   },[])
 
   const handleLogin = async (user) => {
+    const notify = () => toast("Seja bem vindo!");
     try{
-      const {data} = await apiDBC.post('/auth', user)
-      localStorage.setItem('token', data)
-      apiDBC.defaults.headers.common['Authorization'] = data;
-      setAuth(true)
-      window.location.href = '/pessoa'
+      const {data: token} = await apiDBC.post('/auth', user)
+      localStorage.setItem('token', token)
+      apiDBC.defaults.headers.common['Authorization'] = token;
+      setToken(token)
+      navigate('/pessoa')
+      notify()
     } catch(error){
       console.error(error)
     }
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    apiDBC.defaults.headers.common['Authorization'] = undefined;
-    setAuth(false);
-    window.location.href = '/';
+    const notify = () => toast("Volte sempre!");
+    setToken()
+    notify()
+    navigate('/')
   }
 
   const handleSignUp = async (user) => {
@@ -52,8 +58,9 @@ const AuthProvider = ({children}) => {
     )
   }
   return (
-    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp, auth }}>
+    <AuthContext.Provider value={{ handleLogin, handleLogout, handleSignUp, token }}>
       {children}
+      <ToastContainer />
     </AuthContext.Provider>
   )
 }

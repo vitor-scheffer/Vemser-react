@@ -1,27 +1,34 @@
 import { createContext } from "react";
 import apiDBC from '../Services/apiDBC'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom'
 
 const PeopleContext = createContext();
 
 const PeopleProvider = ({children}) => {
+  const navigate = useNavigate()
   const handleRegister = async (newPeople, setup) => {
+    const notify = () => toast("Cadastro realizado com sucesso!");
     try {
       await apiDBC.post('/pessoa', newPeople)
-      alert('cadastrado com sucesso')
       setup()
+      notify()
+      navigate('/pessoa')
     } catch (error) {
       console.log(error)
     }
   }
 
   const handleUpdate = async (newPeople, id, setup, setIsUpdate) => {
+    const notify = () => toast("Usuário modificado com sucesso!");
     let idPessoa = id
     try {
       await apiDBC.put(`/pessoa/${idPessoa}`, newPeople)
-      window.location.href = '/pessoa';
+      notify()
       setup()
       setIsUpdate(false)
-      alert('editado com sucesso')
+      navigate('/pessoa')
     } catch (error) {
       console.log(error)
     }
@@ -30,6 +37,7 @@ const PeopleProvider = ({children}) => {
   return (
     <PeopleContext.Provider value={{ handleRegister, handleUpdate }}>
       {children}
+      <ToastContainer />
     </PeopleContext.Provider>
   )
 }
