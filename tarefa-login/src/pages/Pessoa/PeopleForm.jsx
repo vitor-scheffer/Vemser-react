@@ -9,6 +9,8 @@ import NavBarLeft from '../../components/NavBar/NavBar'
 import { Card } from '../../components/Card/Card'
 import {Button} from '../../components/Button/Button'
 import { Section } from '../../components/Section/Section'
+import  { IMaskInput }  from 'react-imask'
+import moment from 'moment'
 
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
@@ -18,7 +20,6 @@ const PeopleForm = () => {
   const [isUpdate, setIsUpdate] = useState(false);
 
   const setup = async () => {
-
     if (id) {
       setIsUpdate(true)
       try {
@@ -34,6 +35,12 @@ const PeopleForm = () => {
     setup()
   },[])
 
+  const setCpf = (value) => {
+    console.log(value)
+  }
+
+  console.log(new Date())
+
   if (people || !isUpdate) {
     return (
       <Section>
@@ -46,13 +53,15 @@ const PeopleForm = () => {
             cpf: isUpdate ? people.cpf : '',
             email: isUpdate ? people.email : '',
           }}
-          onSubmit={(values, {resetForm}) => {
+          onSubmit={(values, {resetForm}) => {          
+            values.cpf = values.cpf.replaceAll('.','')
+            values.cpf= values.cpf.replaceAll('-','')
             {isUpdate ? handleUpdate(values, id, setup, setIsUpdate) : handleRegister(values, setup) }
             resetForm()
           }}
         >
-          {({errors, setFieldValue }) =>(
-            <Form>
+          {({errors, setFieldValue, handleSubmit, handleChange }) =>(
+            <Form onSubmit={handleSubmit}>
             <h2>{isUpdate ? 'Atualizar pessoa' : 'Cadastrar pessoa'}</h2>
             <div>
               <label htmlFor="nome">Nome:</label>
@@ -61,12 +70,23 @@ const PeopleForm = () => {
             </div>
             <div>
               <label htmlFor="dataNascimento">Data de Nascimento:</label>
-              <Field id="dataNascimento" name="dataNascimento" type="date"/>
+              <IMaskInput
+                type="date"
+                name="dataNascimento"
+                id="dataNascimento"
+                
+                onChange={handleChange}
+                />
             </div>
             <div>
               <label htmlFor="cpf">Cpf:</label>
-              <Field id="cpf" name="cpf"/>
-  
+              <IMaskInput
+                type="text"
+                name="cpf"
+                id="cpf"
+                mask="000.000.000-00"
+                onChange={handleChange}
+                />
             </div>
             <div>
               <label htmlFor="email">E-mail:</label>
