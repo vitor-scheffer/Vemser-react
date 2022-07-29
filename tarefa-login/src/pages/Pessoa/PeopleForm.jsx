@@ -11,6 +11,13 @@ import { Button } from '../../components/Button/Button'
 import { Section } from '../../components/Section/Section'
 import  { IMaskInput }  from 'react-imask'
 
+const userSchema = Yup.object().shape({
+  nome: Yup.string().required('Campo obrigatório.'),
+  dataNascimento: Yup.string().required('Campo obrigatório.'),
+  cpf: Yup.string().required('Campo obrigatório.'),
+  email: Yup.string().required('Campo obrigatório.'),
+})
+
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
   const { handleUpdate } = useContext(PeopleContext)
@@ -46,6 +53,7 @@ const PeopleForm = () => {
             cpf: isUpdate ? people.cpf : '',
             email: isUpdate ? people.email : '',
           }}
+          validationSchema={userSchema}
           onSubmit={(values, {resetForm}) => {          
             values.cpf = values.cpf.replaceAll('.','')
             values.cpf= values.cpf.replaceAll('-','')
@@ -53,12 +61,15 @@ const PeopleForm = () => {
             resetForm()
           }}
         >
-          {({errors, setFieldValue, handleSubmit, handleChange }) =>(
+          {({errors, setFieldValue, touched, handleSubmit, handleChange }) =>(
             <Form onSubmit={handleSubmit}>
             <h2>{isUpdate ? 'Atualizar pessoa' : 'Cadastrar pessoa'}</h2>
             <div>
               <label htmlFor="nome">Nome:</label>
               <Field id="nome" name="nome"/>
+              {errors.nome && touched.nome ? (
+             <div>{errors.nome}</div>
+           ) : null}
             </div>
             <div>
               <label htmlFor="dataNascimento">Data de Nascimento:</label>
@@ -68,6 +79,9 @@ const PeopleForm = () => {
                 id="dataNascimento"
                 onChange={handleChange}
                 />
+                {errors.dataNascimento && touched.dataNascimento ? (
+             <div>{errors.dataNascimento}</div>
+           ) : null}
             </div>
             <div>
               <label htmlFor="cpf">Cpf:</label>
@@ -78,10 +92,16 @@ const PeopleForm = () => {
                 mask="000.000.000-00"
                 onChange={handleChange}
                 />
+                {errors.cpf && touched.cpf ? (
+             <div>{errors.cpf}</div>
+           ) : null}
             </div>
             <div>
               <label htmlFor="email">E-mail:</label>
               <Field id="email" name="email"/>
+              {errors.email && touched.email ? (
+             <div>{errors.email}</div>
+           ) : null}
             </div>
             <Button type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
           </Form>
