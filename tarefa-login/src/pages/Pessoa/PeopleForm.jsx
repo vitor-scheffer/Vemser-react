@@ -1,16 +1,16 @@
-import apiDBC from '../../Services/apiDBC'
-import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Formik, Field, Form } from 'formik'
+import { useState, useEffect } from 'react'
 import * as Yup from 'yup'
-import { PeopleContext } from '../../context/PeopleContext'
 import { useContext } from 'react'
+import  { IMaskInput }  from 'react-imask'
+import moment from 'moment'
+import apiDBC from '../../Services/apiDBC'
+import { PeopleContext } from '../../context/PeopleContext'
 import NavBarLeft from '../../components/NavBar/NavBar'
 import { Card } from '../../components/Card/Card'
 import { Button } from '../../components/Button/Button'
 import { Section } from '../../components/Section/Section'
-import  { IMaskInput }  from 'react-imask'
-import moment from 'moment'
 
 const userSchema = Yup.object().shape({
   nome: Yup.string().required('Campo obrigatório.'),
@@ -27,6 +27,7 @@ const PeopleForm = () => {
   const { id } = useParams();
   const [people, setPeople] = useState();
   const [isUpdate, setIsUpdate] = useState(false);
+  const [isError, setIsError] = useState(true);
   
   const setup = async () => {
     if (id) {
@@ -53,7 +54,7 @@ const PeopleForm = () => {
       <Formik
           initialValues={{
             nome: isUpdate ? people.nome : '',
-            dataNascimento: isUpdate ? moment(people.dataNascimento, 'YY/YY/MMDD').format('YYYY-MM-DD') : '',
+            dataNascimento: isUpdate ? moment(people.dataNascimento, 'YY/YY/MMDD').format('DD-MM-YYYY') : '',
             cpf: isUpdate ? people.cpf : '',
             email: isUpdate ? people.email : '',
           }}
@@ -65,7 +66,7 @@ const PeopleForm = () => {
             resetForm()
           }}
         >
-          {({errors, setFieldValue, touched, handleSubmit, handleChange }) =>(
+          {({errors, touched, handleSubmit }) =>(
             <Form onSubmit={handleSubmit}>
             <h2>{isUpdate ? 'Atualizar pessoa' : 'Cadastrar pessoa'}</h2>
             <div>

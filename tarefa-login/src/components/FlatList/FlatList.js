@@ -6,10 +6,12 @@ import { Button } from '../Button/Button'
 import { Lista, Item } from './Lista'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ModalDescription from '../../Utils/ModalDescription'
 
 const FlasList = ({list, setup}) => {
   const navigate = useNavigate()
   const [openModal, setOpenModal] = useState(false)
+  const [openDescription, setOpenDescription] = useState(false)
   const [id, setId] = useState()
   
   const setDelete = (id) => {
@@ -34,13 +36,26 @@ const FlasList = ({list, setup}) => {
     navigate(`/editar-cadastro/${idPessoa}`)
   }
 
+  const setDescription = (id) => {
+    setId(id)
+    setOpenDescription(true)
+  }
+
+  const setCadastroEndereco = () => {
+    navigate('/endereco')
+  }
+
+  const setUpdateEndereco = () => {
+    navigate(`/endereco/${id}`)
+  }
+
 
   return (
       <div>
         <h2>All tickets</h2>
         <Lista>
           {list.map(item =>(
-            <Item key={item.idPessoa}>
+            <Item onClick={() =>{setDescription(item.idPessoa)}} key={item.idPessoa}>
               <Item>{item.nome}</Item>
               <Item>{item.dataNascimento}</Item>
               <Item>{item.cpf}</Item>
@@ -48,6 +63,10 @@ const FlasList = ({list, setup}) => {
               <Button width="80px" onClick={() => {handleUpdate(item.idPessoa)}}>Editar</Button>
               <Button width="80px" onClick={() => {setDelete(item.idPessoa)}}>Apagar</Button>
               {openModal && <Modal closeModal={setOpenModal} confirmModal={handleDelete}/>}
+              {openDescription && <ModalDescription
+              closeModal={setOpenDescription}
+              setCadastro={setCadastroEndereco}
+              setUpdate={setUpdateEndereco}/>}
             </Item>
           ))} 
         </Lista>

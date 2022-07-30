@@ -8,6 +8,7 @@ const PeopleContext = createContext();
 
 const PeopleProvider = ({children}) => {
   const navigate = useNavigate()
+  
   const handleRegister = async (newPeople, setup) => {
     const notify = () => toast("Cadastro realizado com sucesso!");
     try {

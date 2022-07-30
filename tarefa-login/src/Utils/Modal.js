@@ -1,5 +1,4 @@
 import { ModalPeople } from './Modal.styled'
-import FooterModal from './Modal.styled'
 import { Button } from '../components/Button/Button'
 import { redColor } from '../consts'
 
