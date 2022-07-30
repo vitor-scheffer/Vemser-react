@@ -19,6 +19,7 @@ O site pode ser acessado em: https://tarefa-crud.vercel.app/ <br>
 
 🛠 Tecnologias
 <ul>
+  <li>React JS</li>
   <li>Styled Components</li>
   <li>Heroku</li>
   <li>Axios</li>
@@ -27,7 +28,6 @@ O site pode ser acessado em: https://tarefa-crud.vercel.app/ <br>
   <li>Yup</li>
   <li>React Toastify</li>
   <li>React iMask</li>
-  <li>React JS</li>
   <li>Moment</li>
   <li>React Icons</li>
   <li>React Router</li>
