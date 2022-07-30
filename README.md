@@ -20,9 +20,10 @@ O site pode ser acessado em: https://tarefa-crud.vercel.app/ <br>
 🛠 Tecnologias
 <ul>
   <li>Styled Components</li>
+  <li>Heroku</li>
   <li>Axios</li>
   <li>Formik</li>
-  <li>Via CEP</li>
+  <li>Via CEP API</li>
   <li>Yup</li>
   <li>React Toastify</li>
   <li>React iMask</li>
