@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Modal from '../../Utils/Modal'
 import { Button } from '../Button/Button'
-import { Lista, Item } from './Lista'
+import { Lista, Item, TitleList } from './Lista'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ModalDescription from '../../Utils/ModalDescription'
+import { TextSm } from '../Fonts/Fonts'
+import moment from "moment"
+import { colorHoverMenu } from "../../consts"
 
 const FlasList = ({list, setup}) => {
   const navigate = useNavigate()
@@ -51,16 +54,23 @@ const FlasList = ({list, setup}) => {
 
   return (
       <div>
-        <h2>All tickets</h2>
+        <TitleList>
+          <TextSm color={colorHoverMenu}>Nome</TextSm>
+          <TextSm color={colorHoverMenu}>Data de Nascimento</TextSm>
+          <TextSm color={colorHoverMenu}>CPF</TextSm>
+          <TextSm color={colorHoverMenu}>Email</TextSm>
+        </TitleList>
         <Lista>
           {list.map(item =>(
             <Item key={item.idPessoa}>
-              <p onClick={() => {setDescription(item.idPessoa)}}>{item.nome}</p>
-              <p>{item.dataNascimento}</p>
-              <p>{item.cpf}</p>
-              <p>{item.email}</p>
-              <Button width="80px" onClick={() => {handleUpdate(item.idPessoa)}}>Editar</Button>
-              <Button width="80px" onClick={() => {setDelete(item.idPessoa)}}>Apagar</Button>
+              <TextSm onClick={() => {setDescription(item.idPessoa)}}>{item.nome}</TextSm>
+              <TextSm>{moment(item.dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY')}</TextSm>
+              <TextSm>{item.cpf}</TextSm>
+              <TextSm>{item.email}</TextSm>
+              <div>
+                <Button width="80px" onClick={() => {handleUpdate(item.idPessoa)}}>Editar</Button>
+                <Button width="80px" onClick={() => {setDelete(item.idPessoa)}}>Apagar</Button>
+              </div>
               {openModal && <Modal closeModal={setOpenModal} confirmModal={handleDelete}/>}
               {openDescription && <ModalDescription
               close={setOpenDescription}

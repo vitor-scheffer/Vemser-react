@@ -1,4 +1,4 @@
-import { ModalPeople } from './Modal.styled'
+import { ModalEndereco } from './Modal.styled'
 import { Button } from '../components/Button/Button'
 import { redColor } from '../consts'
 import { useState, useEffect } from 'react'
@@ -35,9 +35,9 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
 
   if(pessoa) {
     return (
-      <div className="modalBackground">
-      <ModalPeople>
-        <Button width="50px" padding="8px" onClick={() =>{close()}} className="closeBtn" > Voltar </Button>
+      <div className="modalBackgroundEnd">
+      <ModalEndereco>
+        <Button width="80px" padding="10px" onClick={() =>{close()}} className="closeBtn" > Voltar </Button>
         <div className="infoPessoa">
           <Subtitle>{pessoa.nome}</Subtitle>
           <TextSm>{pessoa.email}</TextSm>
@@ -65,10 +65,10 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
           ))} 
         </Lista>
         </div>
-        <div className="btnsModal">
-          <Button onClick={setCadastro} >Cadastrar Endereço</Button>
+        <div>
+          <Button onClick={setCadastro} width="180px">Cadastrar Endereço</Button>
         </div>
-        </ModalPeople>
+        </ModalEndereco>
         <ToastContainer />
       </div> 
   )

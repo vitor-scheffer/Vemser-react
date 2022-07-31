@@ -7,7 +7,6 @@ const Modal = ({closeModal, confirmModal}) => {
     
       <div className="modalBackground">
       <ModalPeople>
-        <Button width="35px" padding="8px" onClick={() => closeModal(false)} className="closeBtn" > X </Button>
         <div className="title">
           <h1>Você tem certeza?</h1>
         </div>

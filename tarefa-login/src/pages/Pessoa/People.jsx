@@ -6,7 +6,8 @@ import NavBarLeft from '../../components/NavBar/NavBar';
 import { Card } from '../../components/Card/Card'
 import { Button } from '../../components/Button/Button'
 import { Section } from '../../components/Section/Section'
-
+import { ContainerPeople } from './People.styled';
+import { Tittle } from '../../components/Fonts/Fonts';
 const People = () => {
   const navigate = useNavigate()
   const [pessoas, setPessoas] = useState([])
@@ -32,13 +33,15 @@ const People = () => {
     <Section>
       <NavBarLeft />
       <Card height="100%">
-      <h1>Tickets</h1>
+      <Tittle>Tickets</Tittle>
       
-      <div>
-        <Button onClick={handleCreate}>Cadastrar</Button>
-        <h1>Pessoas</h1>
+      <ContainerPeople>
+        <div>
+          <h1>Pessoas</h1>
+          <Button onClick={handleCreate}>Cadastrar</Button>
+        </div>
         <FlatList list={pessoas} setup={setup}/>
-      </div>
+      </ContainerPeople>
       </Card>
     </Section>
   )

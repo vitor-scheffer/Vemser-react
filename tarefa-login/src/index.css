@@ -30,18 +30,30 @@ code {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.modalBackground button:first-child {
+.modalBackgroundEnd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modalBackgroundEnd button:first-child {
   align-self: flex-end;
 }
 
-.modalBackground button:nth-child(1):hover {
-  background-color: #eb1e1e;
-  border: 1px solid #eb1e1e;
+.btnsModal button:nth-child(1):hover {
+  background-color: #dd1717;
+  border: 1px solid #dd1717;
 }
 
 .btnsModal {
   display: flex;
-  padding-top: 60px;
+  padding: 35px 0;
   gap: 100px;
 }
 

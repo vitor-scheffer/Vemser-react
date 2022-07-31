@@ -20,7 +20,8 @@ const cepSchema = Yup.object().shape({
   cep: Yup.string().required('Campo obrigatório.'),
   cidade: Yup.string().required('Campo obrigatório.'),
   estado: Yup.string().required('Campo obrigatório.'),
-  pais: Yup.string().required('Campo obrigatório.')
+  pais: Yup.string().required('Campo obrigatório.'),
+  bairro: Yup.string().required('Campo obrigatório.'),
 })
 
 const Endereco = () => {
@@ -36,7 +37,6 @@ const Endereco = () => {
       setIsUpdate(true)
       try {
         const { data } = await apiDBC.get(`/endereco/${idEndereco}`)
-        console.log(data)
         setEndereco(data)
       } catch (error) {
         console.log(error)
@@ -51,7 +51,6 @@ const Endereco = () => {
   const handleRegister = async (values) => {
     const notify = () => toast("Endereço cadastrado com sucesso!");
     try{
-      console.log(values)
       await apiDBC.post(`/endereco/{idPessoa}?idPessoa=${id}`, values)
       notify()
       navigate('/pessoa')
@@ -82,6 +81,8 @@ const Endereco = () => {
       console.log(error)
     }
   }
+
+  console.log(endereco)
 
   if((isUpdate && endereco) || !isUpdate) {
     return (
