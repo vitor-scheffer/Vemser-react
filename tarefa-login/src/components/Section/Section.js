@@ -5,9 +5,11 @@ export const Section = styled.section(({}) => ({
   width: '100vw',
   minHeight: '100vh',
   display: 'flex',
-  justifyContent: 'flex-end',
+  flexDirection: 'column',
+  alignItems: 'start',
   paddingRight: '33px',
   paddingBottom: '30px',
-  paddingTop: '30px',
+  paddingLeft: '285px',
+  paddingTop: '128px',
   backgroundColor: colorBgSection
 }));

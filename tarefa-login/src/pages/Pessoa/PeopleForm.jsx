@@ -11,15 +11,7 @@ import NavBarLeft from '../../components/NavBar/NavBar'
 import { Card } from '../../components/Card/Card'
 import { Button } from '../../components/Button/Button'
 import { Section } from '../../components/Section/Section'
-
-const userSchema = Yup.object().shape({
-  nome: Yup.string().required('Campo obrigatório.'),
-  dataNascimento: Yup.string().required('Campo obrigatório.'),
-  cpf: Yup.string().required('Campo obrigatório.'),
-  email: Yup.string().required('Campo obrigatório.'),
-})
-
-
+import { cpfValidation } from '../../Utils/Validations'
 
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
@@ -28,6 +20,13 @@ const PeopleForm = () => {
   const [people, setPeople] = useState();
   const [isUpdate, setIsUpdate] = useState(false);
   const [isError, setIsError] = useState(true);
+
+  const userSchema = Yup.object().shape({
+    nome: Yup.string().required('Campo obrigatório.'),
+    dataNascimento: Yup.string().required('Campo obrigatório.'),
+    cpf: Yup.string().matches(cpfValidation, 'Insira um CPF válido.').required('Campo obrigatório.'),
+    email: Yup.string().email('Insira um email válido').required('Campo obrigatório.'),
+  })
   
   const setup = async () => {
     if (id) {
@@ -115,7 +114,7 @@ const PeopleForm = () => {
              <div>{errors.email}</div>
            ) : null}
             </div>
-            <Button type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
+            <Button disabled={errors.email || errors.cpf || errors.dataNascimento || errors.nome} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
           </Form>
           )}
         </Formik>

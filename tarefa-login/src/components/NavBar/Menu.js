@@ -12,7 +12,7 @@ const Menu = () => {
       <ul>
           <Item name="Endereço" url="/endereco"/>
           <Item name="Pessoa" url="/pessoa"/>
-          <Item name="Cadastrar" url="/cadastro"/>
+          <Item name="Cadastrar Pessoa" url="/cadastro"/>
       </ul>
     </nav>
     <Button onClick={handleLogout}>Sair</Button>

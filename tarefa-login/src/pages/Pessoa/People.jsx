@@ -32,12 +32,13 @@ const People = () => {
   return (
     <Section>
       <NavBarLeft />
-      <Card height="100%">
-      <Tittle>Tickets</Tittle>
-      
+      <div>
+        <Tittle>Pessoas</Tittle>
+      </div>
+      <Card width="100%" height="100%">
       <ContainerPeople>
         <div>
-          <h1>Pessoas</h1>
+          <h1>Colaboradores</h1>
           <Button onClick={handleCreate}>Cadastrar</Button>
         </div>
         <FlatList list={pessoas} setup={setup}/>
