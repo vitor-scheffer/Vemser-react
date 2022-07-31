@@ -1,6 +1,6 @@
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import apiCEP from '../Services/apiCEP'
@@ -10,6 +10,8 @@ import { Card } from '../components/Card/Card'
 import { Button } from '../components/Button/Button'
 import { Section } from '../components/Section/Section'
 import apiDBC from '../Services/apiDBC'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cepSchema = Yup.object().shape({
   tipo: Yup.string().required('Campo obrigatório.'),
@@ -22,6 +24,7 @@ const cepSchema = Yup.object().shape({
 })
 
 const Endereco = () => {
+  const navigate = useNavigate()
   const { id } = useParams();
   const { idEndereco } = useParams();
   const [people, setPeople] = useState();
@@ -46,16 +49,22 @@ const Endereco = () => {
   },[])
   
   const handleRegister = async (values) => {
+    const notify = () => toast("Endereço cadastrado com sucesso!");
     try{
       console.log(values)
       await apiDBC.post(`/endereco/{idPessoa}?idPessoa=${id}`, values)
+      notify()
+      navigate('/pessoa')
     } catch(error)
     {console.log(error);}
   }
 
   const handleUpdate = async (values) => {
+    const notify = () => toast("Endereço modificado com sucesso!");
     try {
       await apiDBC.put(`/endereco/${idEndereco}`, values)
+      notify()
+      navigate('/pessoa')
     } catch (error) {
       console.log(error)
     }
@@ -208,6 +217,7 @@ const Endereco = () => {
             )}
           </Formik>
         </Card>
+        <ToastContainer />
       </Section>
     )
   }

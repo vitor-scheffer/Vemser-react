@@ -5,9 +5,13 @@ import { useState, useEffect } from 'react'
 import apiDBC from '../Services/apiDBC' 
 import {Subtitle, Text, TextSm } from '../components/Fonts/Fonts'
 import { Lista, Item } from '../components/FlatList/Lista'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
   const [pessoa, setPessoa] = useState()
+  const navigate = useNavigate()
 
   const setup = async () => {
     try {
@@ -23,8 +27,10 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
   },[])
 
   const handleDelete = async (idEndereco) => {
+    const notify = () => toast("Endereço excluído com sucesso!");
     await apiDBC.delete(`/endereco/${idEndereco}`)
-    setup()
+    notify()
+    close()
   }
 
   if(pessoa) {
@@ -63,6 +69,7 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
           <Button onClick={setCadastro} >Cadastrar Endereço</Button>
         </div>
         </ModalPeople>
+        <ToastContainer />
       </div> 
   )
   }
