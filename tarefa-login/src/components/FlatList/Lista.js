@@ -25,15 +25,15 @@ export const TitleList = styled.div`
   width: 1200px;
 
   span:nth-child(1) {
-    padding-right: 253px;
+    padding-right: 259px;
   }
 
   span:nth-child(2) {
-    padding-right: 163px;
+    padding-right: 168px;
   }
 
   span:nth-child(3) {
-    padding-right: 268px;
+    padding-right: 274px;
   }
 `;
 

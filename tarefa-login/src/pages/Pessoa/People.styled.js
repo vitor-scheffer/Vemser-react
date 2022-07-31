@@ -10,10 +10,6 @@ export const ContainerPeople = styled.div`
     justify-content: space-between
   }
 
-  button:nth-child(1) {
-    margin-left: 25px;
-  }
-
   li span {
     width: 150px;
   }
