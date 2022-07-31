@@ -31,7 +31,7 @@ const People = () => {
   return (
     <Section>
       <NavBarLeft />
-      <Card width="1122px" height="100%">
+      <Card height="100%">
       <h1>Tickets</h1>
       
       <div>

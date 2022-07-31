@@ -36,8 +36,8 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
           <TextSm>{pessoa.email}</TextSm>
         </div>
         <div>
-          <Text>{pessoa.dataNascimento}</Text>
-          <Text>{pessoa.cpf}</Text>
+          <TextSm>Data de Nascimento: {pessoa.dataNascimento}</TextSm>
+          <TextSm>CPF: {pessoa.cpf}</TextSm>
         </div>
         <div className="body">
         <Lista>
@@ -52,7 +52,7 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
               <p>{item.cidade}</p>
               <p>{item.estado}</p>
               <p>{item.pais}</p>
-              <Button width="80px" onClick={setUpdate}>Editar Endereço</Button>
+              <Button width="80px" onClick={() =>{setUpdate(item.idEndereco)}}>Editar Endereço</Button>
               <Button width="80px" onClick={setCadastro}>Apagar Endereço</Button>
             </Item>
           ))} 

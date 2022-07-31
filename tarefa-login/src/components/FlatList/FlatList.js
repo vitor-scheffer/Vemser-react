@@ -42,13 +42,12 @@ const FlasList = ({list, setup}) => {
   }
 
   const setCadastroEndereco = () => {
-    navigate('/endereco')
-  }
-
-  const setUpdateEndereco = () => {
     navigate(`/endereco/${id}`)
   }
 
+  const setUpdateEndereco = (idEndereco) => {
+    navigate(`/endereco/${id}/${idEndereco}`)
+  }
 
   return (
       <div>

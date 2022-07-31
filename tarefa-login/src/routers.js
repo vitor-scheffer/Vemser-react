@@ -28,6 +28,7 @@ const Routers = () => {
           <Route element={<PrivateRoute />}>
             <Route path="/endereco" element={<Endereco />}></Route>
             <Route path="/endereco/:id" element={<Endereco />}></Route>
+            <Route path="/endereco/:id/:idEndereco" element={<Endereco />}></Route>
             <Route path="/pessoa" element={<People />}></Route>
             <Route path="/cadastro" element={<PeopleForm />}></Route>
             <Route path="/editar-cadastro/:id" element={<PeopleForm />}></Route>

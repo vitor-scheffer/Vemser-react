@@ -50,7 +50,7 @@ const PeopleForm = () => {
     return (
       <Section>
       <NavBarLeft />
-      <Card>
+      <Card height="450px">
       <Formik
           initialValues={{
             nome: isUpdate ? people.nome : '',
