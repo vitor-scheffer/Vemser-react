@@ -80,7 +80,6 @@ const FlasList = ({list, setup}) => {
             </Item>
           ))} 
         </Lista>
-        <ToastContainer />
       </div>
   )
 }
