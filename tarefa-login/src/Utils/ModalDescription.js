@@ -22,8 +22,9 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
     setup()
   },[])
 
-  if(pessoa) {
-    console.log(pessoa)
+  const handleDelete = async (idEndereco) => {
+    await apiDBC.delete(`/endereco/${idEndereco}`)
+    setup()
   }
 
   if(pessoa) {
@@ -43,17 +44,17 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
         <Lista>
           {pessoa.enderecos.map(item =>(
             <Item key={item.idEndereco}>
-              <p>{item.tipo}</p>
-              <p>{item.logradouro}</p>
-              <p>{item.numero}</p>
-              <p>{item.complemento}</p>
-              <p>{item.cep}</p>
-              <p>{item.complemento}</p>
-              <p>{item.cidade}</p>
-              <p>{item.estado}</p>
-              <p>{item.pais}</p>
+              <p><Subtitle>{item.tipo}</Subtitle></p>
+              <p><Subtitle>{item.cep}</Subtitle></p>
+              <p><TextSm>{item.logradouro}</TextSm></p>
+              <p><TextSm>{item.numero}</TextSm></p>
+              <p><TextSm>{item.complemento}</TextSm></p>
+              <p><TextSm>{item.bairro}</TextSm></p>
+              <p><TextSm>{item.cidade}</TextSm></p>
+              <p><TextSm>{item.estado}</TextSm></p>
+              <p><TextSm>{item.pais}</TextSm></p>
               <Button width="80px" onClick={() =>{setUpdate(item.idEndereco)}}>Editar Endereço</Button>
-              <Button width="80px" onClick={setCadastro}>Apagar Endereço</Button>
+              <Button width="80px" onClick={() => {handleDelete(item.idEndereco)}}>Apagar Endereço</Button>
             </Item>
           ))} 
         </Lista>
