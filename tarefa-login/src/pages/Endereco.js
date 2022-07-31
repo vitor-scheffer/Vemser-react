@@ -1,4 +1,6 @@
-import { useFormik } from 'formik'
+import { Formik, Field, Form } from 'formik'
+import * as Yup from 'yup'
+import { useParams } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import apiCEP from '../Services/apiCEP'
@@ -8,126 +10,165 @@ import { Card } from '../components/Card/Card'
 import { Button } from '../components/Button/Button'
 import { Section } from '../components/Section/Section'
 
-
+const cepSchema = Yup.object().shape({
+  tipo: Yup.string().required('Campo obrigatório.'),
+  logradouro: Yup.string().required('Campo obrigatório.'),
+  numero: Yup.number().required('Campo obrigatório.'),
+  cep: Yup.number().required('Campo obrigatório.'),
+  cidade: Yup.string().required('Campo obrigatório.'),
+  estado: Yup.string().required('Campo obrigatório.'),
+  pais: Yup.string().required('Campo obrigatório.')
+})
 
 const Endereco = () => {
-  const [rua, setRua] = useState()
-  const [bairro, setBairro] = useState()
-  const [cidade, setCidade] = useState()
-  const [estado, setEstado] = useState()
+  const { id } = useParams();
+  const [people, setPeople] = useState();
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [endereco, setEndereco] = useState();
 
-
-  const formik = useFormik({
-    initialValues: {
-      tipo: '',
-      logradouro: '',
-      numero: '',
-      complemento: '',
-      cep: '',
-      cidade: '',
-      estado: '',
-      pais: ''
-    },
-    onSubmit: values => {
-      console.log(values)
-    }
-  })
-
-  const procuraCep = async () => {
-    const cep = formik.values.cep.replaceAll('-', '')
+  const procuraCep = async (setFieldValue, cep) => {
     try {
       const { data } = await apiCEP.get(`/${parseInt(cep)}/json/`)
-      setRua(data.logradouro);
-      setBairro(data.bairro);
-      setCidade(data.localidade);
-      setEstado(data.uf);
-      formik.values.logradouro = rua
+      setEndereco(data)
+      setFieldValue('logradouro', data.logradouro)
+      setFieldValue('bairro', data.bairro)
+      setFieldValue('cidade', data.localidade)
+      setFieldValue('estado', data.uf) 
     } catch (error) {
       console.log(error)
     }
   }
 
-  const zeraCampos = () => {
-    setRua('');
-    setBairro('');
-    setCidade('');
-    setEstado('');
-  }
-  
   return (
     <Section>
       <NavBarLeft />
       <Card width="1122px">
-      <h1>Busque seu endereço</h1>
-      <form style={{display: 'flex', flexDirection: 'column', width: '350px', gap:'5px'}}onSubmit={formik.handleSubmit}>
-        <label htmlFor="cep">cep</label>
-        <IMaskInput type="text"
-          id="cep"
-          name="cep"
-          mask="00000-000"
-          onChange={formik.handleChange}
-          onBlur={procuraCep}
-          onKeyDown={zeraCampos} 
-          value={formik.values.cep}
-        />
-        <label htmlFor="rua">Tipo</label>
-        <select name="tipo" id="tipo" onBlur={formik.handleChange}>
-          <option value=''></option>
-          <option value='COMERCIAL'>Comercial</option>
-          <option value='RESIDENCIAL'>Residencial</option>
-        </select>
-        <label htmlFor="rua">Rua</label>
-        <input type="text"
-          id="rua"
-          name="rua"
-          onChange={formik.values.logradouro = rua}
-          value={rua}
-        />
-        <label htmlFor="rua">Número</label>
-        <input type="text"
-          id="numero"
-          name="numero"
-          onChange={formik.handleChange}
-          value={formik.values.numero}
-        />
-        <label htmlFor="bairro">Bairro</label>
-        <input type="text"
-          id="bairro"
-          name="bairro"
-          onChange={formik.values.bairro = bairro}
-          value={bairro}
-        />
-        <label htmlFor="cidade">Cidade</label>
-        <input type="text"
-          id="cidade"
-          name="cidade"
-          onChange={formik.values.cidade = cidade}
-          value={cidade}
-        />
-        <label htmlFor="estado">Estado</label>
-        <input type="text"
-          id="estado"
-          name="estado"
-          onChange={formik.values.estado = estado}
-          value={estado}
-        />
-        <label htmlFor="pais">País</label>
-        <input type="text"
-          id="pais"
-          name="pais"
-          onChange={formik.handleChange}
-          value={formik.values.pais}
-        />
-        <label htmlFor="complemento">Complemento</label>
-        <input type="text"
-          id="complemento"
-          name="complemento"
-          onChange={formik.handleChange}
-          value={formik.values.complemento}
-        />
-        
-        <Button type="submit">Cadastrar</Button>
-      </form>
+        <Formik
+        initialValues={{
+          cep: isUpdate ? endereco.cep : '',
+          tipo: isUpdate ? endereco.tipo : '',
+          logradouro: isUpdate ? endereco.logradouro : '',
+          numero: isUpdate ? endereco.numero : '',
+          bairro: isUpdate ? endereco.bairro : '',
+          cidade: isUpdate ? endereco.cidade : '',
+          estado: isUpdate ? endereco.estado : '',
+          pais: isUpdate ? endereco.pais : '',
+          complemento: isUpdate ? endereco.complemento : ''
+        }}
+        validationSchema={cepSchema}
+        onSubmit={(values, {resetForm}) => {          
+          values.cep = values.cep.replace('-', '')
+          console.log(values)
+          resetForm()
+        }}
+        >
+          {({errors, touched, handleSubmit, setFieldValue }) =>(
+          <Form>
+            <div>
+              <label htmlFor="cep">CEP</label>
+              <Field
+              id="cep"
+              name="cep"
+              onBlur={(ev) => {procuraCep(setFieldValue, ev.target.value)}}
+              />
+              {errors.cep && touched.cep ? (
+             <div>{errors.cep}</div>
+           ) : null}
+            </div>
+
+            <div>
+              <label htmlFor="tipo">Tipo</label>
+              <Field
+              component="select"
+              id="tipo"
+              name="tipo"
+              >
+             <option value={null}>Escolha um tipo</option>
+             <option value="RESIDENCIAL">Residencial</option>
+             <option value="COMERCIAL">Comercial</option>
+             </Field>
+              {errors.tipo && touched.tipo ? (
+             <div>{errors.tipo}</div>
+           ) : null}
+            </div>
+            
+            <div>
+              <label htmlFor="logradouro">Rua</label>
+              <Field
+              id="logradouro"
+              name="logradouro"
+              />
+              {errors.logradouro && touched.logradouro ? (
+             <div>{errors.logradouro}</div>
+           ) : null}
+            </div>
+            
+            <div>
+              <label htmlFor="numero">Número</label>
+              <Field
+              id="numero"
+              name="numero"
+              />
+              {errors.numero && touched.numero ? (
+             <div>{errors.numero}</div>
+           ) : null}
+            </div>
+            
+            <div>
+              <label htmlFor="bairro">Bairro</label>
+              <Field
+              id="bairro"
+              name="bairro"
+              />
+              {errors.bairro && touched.bairro ? (
+             <div>{errors.bairro}</div>
+           ) : null}
+            </div>
+          
+            <div>
+              <label htmlFor="cidade">Cidade</label>
+              <Field
+              id="cidade"
+              name="cidade"
+              />
+              {errors.cidade && touched.cidade ? (
+             <div>{errors.cidade}</div>
+           ) : null}
+            </div>
+            
+            <div>
+              <label htmlFor="estado">Estado</label>
+              <Field
+              id="estado"
+              name="estado"
+              />
+              {errors.estado && touched.estado ? (
+             <div>{errors.estado}</div>
+           ) : null}
+            </div>
+            
+            <div>
+              <label htmlFor="pais">País</label>
+              <Field
+              id="pais"
+              name="pais"
+              />
+              {errors.pais && touched.pais ? (
+             <div>{errors.pais}</div>
+           ) : null}
+            </div>
+            
+            <div>
+              <label htmlFor="complemento">Complemento</label>
+              <Field
+              id="complemento"
+              name="complemento"
+              />
+            </div>
+            <Button disabled={errors.pais || errors.tipo} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
+          </Form>
+          )}
+        </Formik>
       </Card>
     </Section>
   )

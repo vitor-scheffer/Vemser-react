@@ -55,18 +55,19 @@ const FlasList = ({list, setup}) => {
         <h2>All tickets</h2>
         <Lista>
           {list.map(item =>(
-            <Item onClick={() =>{setDescription(item.idPessoa)}} key={item.idPessoa}>
-              <Item>{item.nome}</Item>
-              <Item>{item.dataNascimento}</Item>
-              <Item>{item.cpf}</Item>
-              <Item>{item.email}</Item>
+            <Item key={item.idPessoa}>
+              <p onClick={() => {setDescription(item.idPessoa)}}>{item.nome}</p>
+              <p>{item.dataNascimento}</p>
+              <p>{item.cpf}</p>
+              <p>{item.email}</p>
               <Button width="80px" onClick={() => {handleUpdate(item.idPessoa)}}>Editar</Button>
               <Button width="80px" onClick={() => {setDelete(item.idPessoa)}}>Apagar</Button>
               {openModal && <Modal closeModal={setOpenModal} confirmModal={handleDelete}/>}
               {openDescription && <ModalDescription
-              closeModal={setOpenDescription}
+              close={setOpenDescription}
               setCadastro={setCadastroEndereco}
-              setUpdate={setUpdateEndereco}/>}
+              setUpdate={setUpdateEndereco}
+              id={id}/>}
             </Item>
           ))} 
         </Lista>

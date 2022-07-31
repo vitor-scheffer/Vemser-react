@@ -27,7 +27,7 @@ code {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .modalBackground button:first-child {
@@ -61,6 +61,11 @@ input {
   border: 1px solid #DFE0EB;
   padding: 11px 16px;
   border-radius: 8px;
-};
+}
+
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
 
 

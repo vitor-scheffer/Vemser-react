@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 export const Section = styled.section(({}) => ({
   width: '100vw',
-  height: '100vh',
+  height: '100%',
   display: 'flex',
   justifyContent: 'flex-end',
   paddingRight: '33px',
