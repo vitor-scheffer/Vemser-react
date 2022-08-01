@@ -218,7 +218,7 @@ const Endereco = () => {
               </FormContentPeople>
               </div>
               </BodyFormAddress>
-              <Button type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
+              <Button disabled={errors.pais || errors.numero || errors.rua || errors.estado || errors.tipo || errors.cidade || errors.cep} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
             </Form>
             )}
           </Formik>
