@@ -78,12 +78,15 @@ const Endereco = () => {
     try {
       const { data } = await apiCEP.get(`/${parseInt(newCep)}/json/`)
       setFieldValue('logradouro', data.logradouro)
+      setFieldValue('bairro', data.bairro)
       setFieldValue('cidade', data.localidade)
       setFieldValue('estado', data.uf) 
     } catch (error) {
       console.log(error)
     }
   }
+
+  console.log(endereco)
 
   if((isUpdate && endereco) || !isUpdate) {
     return (
@@ -228,4 +231,3 @@ const Endereco = () => {
 
 
 export default Endereco
-
