@@ -1,15 +1,15 @@
 import Logo from '../Logo'
 import Menu from './Menu'
-import { NavBar } from './NavBar.styled'
+import { NavBar, LogoSideBar } from './NavBar.styled'
 import {Subtitle} from '../Fonts/Fonts'
 
 const NavBarLeft = () => {
   return (
     <NavBar>
-      <div>
+      <LogoSideBar>
         <Logo />
         <Subtitle>Dashboard Kit</Subtitle>
-      </div>
+      </LogoSideBar>
       <Menu />
     </NavBar>
   )

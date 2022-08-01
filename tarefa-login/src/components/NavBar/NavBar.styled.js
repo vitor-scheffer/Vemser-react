@@ -16,3 +16,9 @@ export const NavBar = styled.div(({}) => ({
   paddingTop: 37,
   backgroundColor: colorSecondary
 }));
+
+export const LogoSideBar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
