@@ -15,7 +15,7 @@ const Menu = () => {
           <Item name="Cadastrar Pessoa" url="/cadastro"/>
       </ul>
     </NavSideBar>
-    <Button onClick={handleLogout}>Sair</Button>
+    <Button marginLeft='32px' onClick={handleLogout}>Sair</Button>
     </>
      
   )
