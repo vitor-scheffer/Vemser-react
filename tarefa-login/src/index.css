@@ -91,4 +91,41 @@ button:disabled {
   width: 100%;
 }
 
+.infoPessoa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infoPessoa div:nth-child(1) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.infoPessoa div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.infoPessoa div:nth-child(2) span {
+  width: 250px;
+}
+
+.infoPessoa img {
+  width: 60px;
+  clip-path: circle();
+  margin-right: 20px;
+}
+
+.btnsEdit {
+  display: flex;
+  gap: 10px;
+}
+
+.btnsEditModal {
+  flex-direction: column;
+}
+
 

@@ -8,6 +8,8 @@ import { Lista, Item, TitleList } from '../components/FlatList/Lista'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment'
+import photo from '../images/no-user.jpeg'
 
 const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
   const [pessoa, setPessoa] = useState()
@@ -41,12 +43,16 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
       <ModalEndereco>
         <Button width="80px" padding="10px" onClick={() =>{close()}} className="closeBtn" > Voltar </Button>
         <div className="infoPessoa">
+          <div>
+          <img src={photo} alt="" />
           <Subtitle>{pessoa.nome}</Subtitle>
+          </div>
+
+        <div className="datasUser">
           <TextSm>{pessoa.email}</TextSm>
-        </div>
-        <div>
-          <TextSm>Data de Nascimento: {pessoa.dataNascimento}</TextSm>
+          <TextSm>Data de Nascimento: {moment(pessoa.dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY')}</TextSm>
           <TextSm>CPF: {pessoa.cpf}</TextSm>
+        </div>
         </div>
         <Body>
         <nav>
@@ -73,8 +79,10 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
               <p><TextSm>{item.cidade}</TextSm></p>
               <p><TextSm>{item.estado}</TextSm></p>
               <p><TextSm>{item.pais}</TextSm></p>
-              <Button width="80px" onClick={() =>{setUpdate(item.idEndereco)}}>Editar Endereço</Button>
-              <Button width="80px" onClick={() => {handleDelete(item.idEndereco)}}>Apagar Endereço</Button>
+              <div className="btnsEdit btnsEditModal">
+                <Button width="150px" onClick={() =>{setUpdate(item.idEndereco)}}>Editar Endereço</Button>
+                <Button width="150px" onClick={() => {handleDelete(item.idEndereco)}}>Apagar Endereço</Button>
+              </div>
             </Item>
           )) : <h1>Ainda não existem endereços cadastrados.</h1>
           }

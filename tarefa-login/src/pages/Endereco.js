@@ -108,8 +108,7 @@ const Endereco = () => {
             complemento: isUpdate ? endereco.complemento : ''
           }}
           validationSchema={cepSchema}
-          onSubmit={(values, {resetForm}) => {   
-            console.log('chamou')       
+          onSubmit={(values, {resetForm}) => {     
             values.cep = values.cep.replace('-', '')
             {isUpdate ? handleUpdate(values) : handleRegister(values)}
             resetForm()
