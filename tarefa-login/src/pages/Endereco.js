@@ -1,17 +1,21 @@
-import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
-import { useParams, useNavigate } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../context/AuthContext'
-import apiCEP from '../Services/apiCEP'
 import  { IMaskInput }  from 'react-imask'
-import NavBarLeft from '../components/NavBar/NavBar'
+import { Formik, Field, Form } from 'formik'
+import { ToastContainer, toast } from 'react-toastify';
+import { useContext, useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import apiCEP from '../Services/apiCEP'
+import apiDBC from '../Services/apiDBC'
 import { Card } from '../components/Card/Card'
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../context/AuthContext'
+import NavBarLeft from '../components/NavBar/NavBar'
 import { Button } from '../components/Button/Button'
 import { Section } from '../components/Section/Section'
-import apiDBC from '../Services/apiDBC'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { colorHoverMenu } from '../consts'
+import { TextSm } from '../components/Fonts/Fonts'
+import { FormContent } from '../components/formContent';
+import { BodyFormAddress } from '../components/bodyAddressContent';
 
 const cepSchema = Yup.object().shape({
   tipo: Yup.string().required('Campo obrigatório.'),
@@ -74,7 +78,6 @@ const Endereco = () => {
     try {
       const { data } = await apiCEP.get(`/${parseInt(newCep)}/json/`)
       setFieldValue('logradouro', data.logradouro)
-      setFieldValue('bairro', data.bairro)
       setFieldValue('cidade', data.localidade)
       setFieldValue('estado', data.uf) 
     } catch (error) {
@@ -82,21 +85,19 @@ const Endereco = () => {
     }
   }
 
-  console.log(endereco)
-
   if((isUpdate && endereco) || !isUpdate) {
     return (
       <Section>
+        <h2>{isUpdate ? 'Atualizar Endereço' : 'Cadastrar Endereço'}</h2>
         <NavBarLeft />
-        <Card width="1420px" height="615px">
-          <Formik
+        <Card width="100%" height="615px">
+        <Formik
           initialValues={{
             idPessoa: id,
             cep: isUpdate ? endereco.cep : '',
             tipo: isUpdate ? endereco.tipo : '',
             logradouro: isUpdate ? endereco.logradouro : '',
             numero: isUpdate ? endereco.numero : '',
-            bairro: isUpdate ? endereco.bairro : '',
             cidade: isUpdate ? endereco.cidade : '',
             estado: isUpdate ? endereco.estado : '',
             pais: isUpdate ? endereco.pais : '',
@@ -104,28 +105,36 @@ const Endereco = () => {
           }}
           validationSchema={cepSchema}
           onSubmit={(values, {resetForm}) => {   
-            console.log(values)       
+            console.log('chamou')       
             values.cep = values.cep.replace('-', '')
             {isUpdate ? handleUpdate(values) : handleRegister(values)}
             resetForm()
           }}
           >
             {({errors, touched, handleSubmit, setFieldValue }) =>(
-            <Form>
+            <Form className="formAddress" onSubmit={handleSubmit}>
+              <BodyFormAddress>
               <div>
-                <label htmlFor="cep">CEP</label>
+              <FormContent>
+                <label htmlFor="cep"><TextSm color={colorHoverMenu} fontSize='12px'>CEP</TextSm></label>
                 <Field
-                id="cep"
                 name="cep"
-                onBlur={(ev) => {procuraCep(setFieldValue, ev.target.value)}}
+                render= {({field}) => (
+                  <IMaskInput
+                  {...field}
+                  id="cep" 
+                  mask="00000-000"
+                  onBlur={(ev) => {procuraCep(setFieldValue, ev.target.value)}}
+                  /> 
+                  )}
                 />
                 {errors.cep && touched.cep ? (
                <div>{errors.cep}</div>
-             ) : null}
-              </div>
+                ) : null}
+              </FormContent>
   
-              <div>
-                <label htmlFor="tipo">Tipo</label>
+              <FormContent>
+                <label htmlFor="tipo"><TextSm color={colorHoverMenu} fontSize='12px'>TIPO</TextSm></label>
                 <Field
                 component="select"
                 id="tipo"
@@ -138,10 +147,10 @@ const Endereco = () => {
                 {errors.tipo && touched.tipo ? (
                <div>{errors.tipo}</div>
              ) : null}
-              </div>
+              </FormContent>
               
-              <div>
-                <label htmlFor="logradouro">Rua</label>
+              <FormContent>
+                <label htmlFor="logradouro"><TextSm color={colorHoverMenu} fontSize='12px'>RUA</TextSm></label>
                 <Field
                 id="logradouro"
                 name="logradouro"
@@ -149,10 +158,10 @@ const Endereco = () => {
                 {errors.logradouro && touched.logradouro ? (
                <div>{errors.logradouro}</div>
              ) : null}
-              </div>
+              </FormContent>
               
-              <div>
-                <label htmlFor="numero">Número</label>
+              <FormContent>
+                <label htmlFor="numero"><TextSm color={colorHoverMenu} fontSize='12px'>NÚMERO</TextSm></label>
                 <Field
                 id="numero"
                 name="numero"
@@ -160,21 +169,12 @@ const Endereco = () => {
                 {errors.numero && touched.numero ? (
                <div>{errors.numero}</div>
              ) : null}
+              </FormContent>
               </div>
               
               <div>
-                <label htmlFor="bairro">Bairro</label>
-                <Field
-                id="bairro"
-                name="bairro"
-                />
-                {errors.bairro && touched.bairro ? (
-               <div>{errors.bairro}</div>
-             ) : null}
-              </div>
-            
-              <div>
-                <label htmlFor="cidade">Cidade</label>
+              <FormContent>
+                <label htmlFor="cidade"><TextSm color={colorHoverMenu} fontSize='12px'>CIDADE</TextSm></label>
                 <Field
                 id="cidade"
                 name="cidade"
@@ -182,10 +182,10 @@ const Endereco = () => {
                 {errors.cidade && touched.cidade ? (
                <div>{errors.cidade}</div>
              ) : null}
-              </div>
+              </FormContent>
               
-              <div>
-                <label htmlFor="estado">Estado</label>
+              <FormContent>
+                <label htmlFor="estado"><TextSm color={colorHoverMenu} fontSize='12px'>ESTADO</TextSm></label>
                 <Field
                 id="estado"
                 name="estado"
@@ -193,10 +193,10 @@ const Endereco = () => {
                 {errors.estado && touched.estado ? (
                <div>{errors.estado}</div>
              ) : null}
-              </div>
+              </FormContent>
               
-              <div>
-                <label htmlFor="pais">País</label>
+              <FormContent>
+                <label htmlFor="pais"><TextSm color={colorHoverMenu} fontSize='12px'>PAÍS</TextSm></label>
                 <Field
                 id="pais"
                 name="pais"
@@ -204,16 +204,18 @@ const Endereco = () => {
                 {errors.pais && touched.pais ? (
                <div>{errors.pais}</div>
              ) : null}
-              </div>
+              </FormContent>
               
-              <div>
-                <label htmlFor="complemento">Complemento</label>
+              <FormContent>
+                <label htmlFor="complemento"><TextSm color={colorHoverMenu} fontSize='12px'>COMPLEMENTO</TextSm></label>
                 <Field
                 id="complemento"
                 name="complemento"
                 />
+              </FormContent>
               </div>
-              <Button disabled={errors.pais || errors.tipo} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
+              </BodyFormAddress>
+              <Button type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
             </Form>
             )}
           </Formik>

@@ -68,17 +68,27 @@ a {
   text-decoration: none;
 }
 
-input {
+input,
+select {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   background-color: #FCFDFE;
   border: 1px solid #DFE0EB;
   padding: 11px 16px;
   border-radius: 8px;
+  width: 316px;
 }
 
 button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.formPeople,
+.formAddress {
+  display: flex;
+  flex-direction: column;
+  padding-left: 32px;
+  width: 100%;
 }
 
 

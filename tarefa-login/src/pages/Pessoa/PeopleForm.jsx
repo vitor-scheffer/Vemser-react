@@ -1,18 +1,21 @@
-import { useParams } from 'react-router-dom'
-import { Formik, Field, Form } from 'formik'
-import { useState, useEffect } from 'react'
 import * as Yup from 'yup'
+import moment from 'moment'
 import { useContext } from 'react'
 import  { IMaskInput }  from 'react-imask'
-import moment from 'moment'
+import { useState, useEffect } from 'react'
+import { Formik, Field, Form } from 'formik'
+import { useParams } from 'react-router-dom'
 import apiDBC from '../../Services/apiDBC'
-import { PeopleContext } from '../../context/PeopleContext'
-import NavBarLeft from '../../components/NavBar/NavBar'
 import { Card } from '../../components/Card/Card'
 import { Button } from '../../components/Button/Button'
-import { Section } from '../../components/Section/Section'
+import NavBarLeft from '../../components/NavBar/NavBar'
 import { cpfValidation } from '../../Utils/Validations'
-
+import { Section } from '../../components/Section/Section'
+import { PeopleContext } from '../../context/PeopleContext'
+import { colorHoverMenu } from '../../consts'
+import { TextSm } from '../../components/Fonts/Fonts'
+import { FormContent } from '../../components/formContent';
+ 
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
   const { handleUpdate } = useContext(PeopleContext)
@@ -48,8 +51,9 @@ const PeopleForm = () => {
   if (people || !isUpdate) {
     return (
       <Section>
+      <h2>{isUpdate ? 'Atualizar Pessoa' : 'Cadastrar Pessoa'}</h2>
       <NavBarLeft />
-      <Card height="450px">
+      <Card width="100%" height="600px">
       <Formik
           initialValues={{
             nome: isUpdate ? people.nome : '',
@@ -66,17 +70,16 @@ const PeopleForm = () => {
           }}
         >
           {({errors, touched, handleSubmit }) =>(
-            <Form onSubmit={handleSubmit}>
-            <h2>{isUpdate ? 'Atualizar pessoa' : 'Cadastrar pessoa'}</h2>
-            <div>
-              <label htmlFor="nome">Nome:</label>
+            <Form className="formPeople" onSubmit={handleSubmit}>
+            <FormContent>
+              <label htmlFor="nome"><TextSm color={colorHoverMenu} fontSize='12px'>NOME</TextSm></label>
               <Field id="nome" name="nome"/>
               {errors.nome && touched.nome ? (
              <div>{errors.nome}</div>
            ) : null}
-            </div>
-            <div>
-              <label htmlFor="dataNascimento">Data de Nascimento:</label>
+            </FormContent>
+            <FormContent>
+              <label htmlFor="dataNascimento"><TextSm color={colorHoverMenu} fontSize='12px'>DATA DE NASCIMENTO</TextSm></label>
               <Field
               name="dataNascimento"
               render= {({field}) => (
@@ -90,9 +93,9 @@ const PeopleForm = () => {
                 {errors.dataNascimento && touched.dataNascimento ? (
              <div>{errors.dataNascimento}</div>
            ) : null}
-            </div>
-            <div>
-              <label htmlFor="cpf">Cpf:</label>
+            </FormContent>
+            <FormContent>
+              <label htmlFor="cpf"><TextSm color={colorHoverMenu} fontSize='12px'>CPF</TextSm></label>
               <Field
               name="cpf"
               render= {({field}) => (
@@ -106,14 +109,14 @@ const PeopleForm = () => {
                 {errors.cpf && touched.cpf ? (
              <div>{errors.cpf}</div>
            ) : null}
-            </div>
-            <div>
-              <label htmlFor="email">E-mail:</label>
+            </FormContent>
+            <FormContent>
+              <label htmlFor="email"><TextSm color={colorHoverMenu} fontSize='12px'>EMAIL</TextSm></label>
               <Field id="email" name="email"/>
               {errors.email && touched.email ? (
              <div>{errors.email}</div>
            ) : null}
-            </div>
+            </FormContent>
             <Button disabled={errors.email || errors.cpf || errors.dataNascimento || errors.nome} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
           </Form>
           )}
