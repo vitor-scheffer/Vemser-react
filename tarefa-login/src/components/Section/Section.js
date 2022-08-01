@@ -2,7 +2,7 @@ import { colorBgSection } from '../../consts'
 import styled from "styled-components"
 
 export const Section = styled.section(({}) => ({
-  width: '100vw',
+  maxWidth: '100vw',
   minHeight: '100vh',
   display: 'flex',
   flexDirection: 'column',

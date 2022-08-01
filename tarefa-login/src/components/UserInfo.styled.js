@@ -5,7 +5,7 @@ export const UserInfoContainer = styled.div`
   position: absolute;
   top: 0;
   display: flex;
-  width: 1600px;
+  width: 1585px;
   padding-top: 36px;
   justify-content: space-between;
   align-items: center;
