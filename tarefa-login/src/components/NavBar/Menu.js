@@ -10,7 +10,6 @@ const Menu = () => {
     <>
     <nav>
       <ul>
-          <Item name="Endereço" url="/endereco"/>
           <Item name="Pessoa" url="/pessoa"/>
           <Item name="Cadastrar Pessoa" url="/cadastro"/>
       </ul>

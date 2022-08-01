@@ -31,7 +31,8 @@ const AuthProvider = ({children}) => {
       navigate('/pessoa')
       notify()
     } catch(error){
-      const notifyError = () => toast(`${error ? error.response.data.message : 'Ocorreu um erro'}`);
+      console.log(error)
+      const notifyError = () => toast('Login ou senha incorretos');
       notifyError()
     }
   }
