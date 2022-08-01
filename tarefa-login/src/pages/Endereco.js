@@ -14,8 +14,8 @@ import { Button } from '../components/Button/Button'
 import { Section } from '../components/Section/Section'
 import { colorHoverMenu } from '../consts'
 import { TextSm } from '../components/Fonts/Fonts'
-import { FormContent } from '../components/formContent';
-import { BodyFormAddress } from '../components/bodyAddressContent';
+import { FormContentPeople } from '../components/FormPeople';
+import { BodyFormAddress } from '../components/FormAddress';
 
 const cepSchema = Yup.object().shape({
   tipo: Yup.string().required('Campo obrigatório.'),
@@ -115,7 +115,7 @@ const Endereco = () => {
             <Form className="formAddress" onSubmit={handleSubmit}>
               <BodyFormAddress>
               <div>
-              <FormContent>
+              <FormContentPeople>
                 <label htmlFor="cep"><TextSm color={colorHoverMenu} fontSize='12px'>CEP</TextSm></label>
                 <Field
                 name="cep"
@@ -131,9 +131,9 @@ const Endereco = () => {
                 {errors.cep && touched.cep ? (
                <div>{errors.cep}</div>
                 ) : null}
-              </FormContent>
+              </FormContentPeople>
   
-              <FormContent>
+              <FormContentPeople>
                 <label htmlFor="tipo"><TextSm color={colorHoverMenu} fontSize='12px'>TIPO</TextSm></label>
                 <Field
                 component="select"
@@ -147,9 +147,9 @@ const Endereco = () => {
                 {errors.tipo && touched.tipo ? (
                <div>{errors.tipo}</div>
              ) : null}
-              </FormContent>
+              </FormContentPeople>
               
-              <FormContent>
+              <FormContentPeople>
                 <label htmlFor="logradouro"><TextSm color={colorHoverMenu} fontSize='12px'>RUA</TextSm></label>
                 <Field
                 id="logradouro"
@@ -158,9 +158,9 @@ const Endereco = () => {
                 {errors.logradouro && touched.logradouro ? (
                <div>{errors.logradouro}</div>
              ) : null}
-              </FormContent>
+              </FormContentPeople>
               
-              <FormContent>
+              <FormContentPeople>
                 <label htmlFor="numero"><TextSm color={colorHoverMenu} fontSize='12px'>NÚMERO</TextSm></label>
                 <Field
                 id="numero"
@@ -169,11 +169,11 @@ const Endereco = () => {
                 {errors.numero && touched.numero ? (
                <div>{errors.numero}</div>
              ) : null}
-              </FormContent>
+              </FormContentPeople>
               </div>
               
               <div>
-              <FormContent>
+              <FormContentPeople>
                 <label htmlFor="cidade"><TextSm color={colorHoverMenu} fontSize='12px'>CIDADE</TextSm></label>
                 <Field
                 id="cidade"
@@ -182,9 +182,9 @@ const Endereco = () => {
                 {errors.cidade && touched.cidade ? (
                <div>{errors.cidade}</div>
              ) : null}
-              </FormContent>
+              </FormContentPeople>
               
-              <FormContent>
+              <FormContentPeople>
                 <label htmlFor="estado"><TextSm color={colorHoverMenu} fontSize='12px'>ESTADO</TextSm></label>
                 <Field
                 id="estado"
@@ -193,9 +193,9 @@ const Endereco = () => {
                 {errors.estado && touched.estado ? (
                <div>{errors.estado}</div>
              ) : null}
-              </FormContent>
+              </FormContentPeople>
               
-              <FormContent>
+              <FormContentPeople>
                 <label htmlFor="pais"><TextSm color={colorHoverMenu} fontSize='12px'>PAÍS</TextSm></label>
                 <Field
                 id="pais"
@@ -204,18 +204,18 @@ const Endereco = () => {
                 {errors.pais && touched.pais ? (
                <div>{errors.pais}</div>
              ) : null}
-              </FormContent>
+              </FormContentPeople>
               
-              <FormContent>
+              <FormContentPeople>
                 <label htmlFor="complemento"><TextSm color={colorHoverMenu} fontSize='12px'>COMPLEMENTO</TextSm></label>
                 <Field
                 id="complemento"
                 name="complemento"
                 />
-              </FormContent>
+              </FormContentPeople>
               </div>
               </BodyFormAddress>
-              <Button type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
+              <Button disabled={errors.pais || errors.numero || errors.rua || errors.estado || errors.tipo || errors.cidade || errors.cep} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
             </Form>
             )}
           </Formik>
@@ -225,4 +225,7 @@ const Endereco = () => {
     )
   }
 }
+
+
 export default Endereco
+

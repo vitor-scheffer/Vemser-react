@@ -14,7 +14,7 @@ import { Section } from '../../components/Section/Section'
 import { PeopleContext } from '../../context/PeopleContext'
 import { colorHoverMenu } from '../../consts'
 import { TextSm } from '../../components/Fonts/Fonts'
-import { FormContent } from '../../components/formContent';
+import { FormContentPeople } from '../../components/FormPeople';
  
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
@@ -71,14 +71,14 @@ const PeopleForm = () => {
         >
           {({errors, touched, handleSubmit }) =>(
             <Form className="formPeople" onSubmit={handleSubmit}>
-            <FormContent>
+            <FormContentPeople>
               <label htmlFor="nome"><TextSm color={colorHoverMenu} fontSize='12px'>NOME</TextSm></label>
               <Field id="nome" name="nome"/>
               {errors.nome && touched.nome ? (
              <div>{errors.nome}</div>
            ) : null}
-            </FormContent>
-            <FormContent>
+            </FormContentPeople>
+            <FormContentPeople>
               <label htmlFor="dataNascimento"><TextSm color={colorHoverMenu} fontSize='12px'>DATA DE NASCIMENTO</TextSm></label>
               <Field
               name="dataNascimento"
@@ -93,8 +93,8 @@ const PeopleForm = () => {
                 {errors.dataNascimento && touched.dataNascimento ? (
              <div>{errors.dataNascimento}</div>
            ) : null}
-            </FormContent>
-            <FormContent>
+            </FormContentPeople>
+            <FormContentPeople>
               <label htmlFor="cpf"><TextSm color={colorHoverMenu} fontSize='12px'>CPF</TextSm></label>
               <Field
               name="cpf"
@@ -109,14 +109,14 @@ const PeopleForm = () => {
                 {errors.cpf && touched.cpf ? (
              <div>{errors.cpf}</div>
            ) : null}
-            </FormContent>
-            <FormContent>
+            </FormContentPeople>
+            <FormContentPeople>
               <label htmlFor="email"><TextSm color={colorHoverMenu} fontSize='12px'>EMAIL</TextSm></label>
               <Field id="email" name="email"/>
               {errors.email && touched.email ? (
              <div>{errors.email}</div>
            ) : null}
-            </FormContent>
+            </FormContentPeople>
             <Button disabled={errors.email || errors.cpf || errors.dataNascimento || errors.nome} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>
           </Form>
           )}
