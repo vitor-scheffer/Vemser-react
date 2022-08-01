@@ -7,6 +7,19 @@ import { Button } from '../components/Button/Button'
 import { Subtitle, Tittle, TextSm } from '../components/Fonts/Fonts'
 import {colorHoverMenu} from '../consts'
 
+const validate = values => {
+  const errors = {};
+  if (!values.login) {
+    errors.login = 'Por favor insira um email.';
+  }
+
+  if (!values.senha) {
+    errors.senha = 'Por favor insira uma senha.';
+  } 
+
+  return errors;
+};
+
 const Users = () => {
   const { handleSignUp } = useContext(AuthContext)
   const formik = useFormik({
@@ -14,8 +27,10 @@ const Users = () => {
       login: '',
       senha: ''
     },
-    onSubmit: values => {
+    validate,
+    onSubmit: (values, {resetForm}) => {
       handleSignUp(values)
+      resetForm();
     }
   })
 
@@ -32,6 +47,7 @@ const Users = () => {
         onChange={formik.handleChange}
         value={formik.values.login}
         />
+        {formik.errors.login ? <div>{formik.errors.login}</div> : null}
         <label htmlFor="senha"><TextSm color={colorHoverMenu} fontSize='12px'>SENHA</TextSm></label>
         <input type="password"
         id="senha"
@@ -39,6 +55,7 @@ const Users = () => {
         onChange={formik.handleChange}
         value={formik.values.senha}
         />
+        {formik.errors.senha ? <div>{formik.errors.senha}</div> : null}
         <Button type="submit" onSubmit={formik.onSubmit}>Cadastrar</Button>
       </form>
     </Card>

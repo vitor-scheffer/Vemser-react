@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import { useContext } from 'react'
+import * as Yup from 'yup'
 import { AuthContext } from '../context/AuthContext'
 import { ContainerLogin } from './Login.styled'
 import { Link } from 'react-router-dom'
@@ -9,6 +10,19 @@ import { Card } from '../components/Card/Card'
 import { colorHoverMenu, colorPrimary } from '../consts'
 import { Button } from '../components/Button/Button'
 
+const validate = values => {
+  const errors = {};
+  if (!values.login) {
+    errors.login = 'Insira seu email.';
+  }
+
+  if (!values.senha) {
+    errors.senha = 'Insira sua senha.';
+  } 
+
+  return errors;
+};
+
 const Login = () => {
   const { handleLogin } = useContext(AuthContext)
   const formik = useFormik({
@@ -16,6 +30,7 @@ const Login = () => {
       login: '',
       senha: ''
     },
+    validate,
     onSubmit: (values, {resetForm}) => {
       handleLogin(values)
       resetForm()
@@ -40,6 +55,7 @@ const Login = () => {
             onChange={formik.handleChange}
             value={formik.values.login}
           />
+          {formik.errors.login ? <div>{formik.errors.login}</div> : null}
           </div>
           <div>
           <label htmlFor="senha"><TextSm color={colorHoverMenu} fontSize='12px'>PASSWORD</TextSm></label>
@@ -50,6 +66,7 @@ const Login = () => {
             onChange={formik.handleChange}
             value={formik.values.senha}
           />
+          {formik.errors.senha ? <div>{formik.errors.senha}</div> : null}
           </div>
           <Button width='100%'>Log In</Button>     
         </form>
@@ -61,4 +78,5 @@ const Login = () => {
     </ContainerLogin>
   )
 }
+
 export default Login
