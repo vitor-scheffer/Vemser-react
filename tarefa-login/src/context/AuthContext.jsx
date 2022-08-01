@@ -52,7 +52,7 @@ const AuthProvider = ({children}) => {
       notify()
       navigate('/')
     } catch(error){
-      const notifyError = () => toast(`${error.response.data.message}`);
+      const notifyError = () => toast(error);
       notifyError()
     }
   }
