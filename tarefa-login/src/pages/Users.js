@@ -40,22 +40,27 @@ const Users = () => {
     <Card width="650px">
       <Tittle>Preencha os campos necessários para o cadastro</Tittle>
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="login"><TextSm color={colorHoverMenu} fontSize='12px'>USUÁRIO</TextSm></label>
-        <input type="text"
-        id="login"
-        name="login"
-        onChange={formik.handleChange}
-        value={formik.values.login}
-        />
-        {formik.errors.login ? <div>{formik.errors.login}</div> : null}
-        <label htmlFor="senha"><TextSm color={colorHoverMenu} fontSize='12px'>SENHA</TextSm></label>
-        <input type="password"
-        id="senha"
-        name="senha"
-        onChange={formik.handleChange}
-        value={formik.values.senha}
-        />
-        {formik.errors.senha ? <div>{formik.errors.senha}</div> : null}
+        <div>
+          <label htmlFor="login"><TextSm color={colorHoverMenu} fontSize='12px'>USUÁRIO</TextSm></label>
+          <input type="text"
+          id="login"
+          name="login"
+          onChange={formik.handleChange}
+          value={formik.values.login}
+          />
+          {formik.errors.login ? <div>{formik.errors.login}</div> : null}
+        </div>
+        
+        <div>
+          <label htmlFor="senha"><TextSm color={colorHoverMenu} fontSize='12px'>SENHA</TextSm></label>
+          <input type="password"
+          id="senha"
+          name="senha"
+          onChange={formik.handleChange}
+          value={formik.values.senha}
+          />
+          {formik.errors.senha ? <div>{formik.errors.senha}</div> : null}
+        </div>
         <Button type="submit" onSubmit={formik.onSubmit}>Cadastrar</Button>
       </form>
     </Card>
