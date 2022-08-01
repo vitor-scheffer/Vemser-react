@@ -16,6 +16,7 @@ import { colorHoverMenu } from '../consts'
 import { TextSm } from '../components/Fonts/Fonts'
 import { FormContentPeople } from '../components/FormPeople';
 import { BodyFormAddress } from '../components/FormAddress';
+import UserInfo from '../components/UserInfo';
 
 const cepSchema = Yup.object().shape({
   tipo: Yup.string().required('Campo obrigatório.'),
@@ -91,7 +92,7 @@ const Endereco = () => {
   if((isUpdate && endereco) || !isUpdate) {
     return (
       <Section>
-        <h2>{isUpdate ? 'Atualizar Endereço' : 'Cadastrar Endereço'}</h2>
+        <UserInfo tittle={isUpdate ? 'Atualizar Endereço' : 'Cadastrar Endereço'} />
         <NavBarLeft />
         <Card width="100%" height="615px">
         <Formik

@@ -15,6 +15,7 @@ import { PeopleContext } from '../../context/PeopleContext'
 import { colorHoverMenu } from '../../consts'
 import { TextSm } from '../../components/Fonts/Fonts'
 import { FormContentPeople } from '../../components/FormPeople';
+import UserInfo from '../../components/UserInfo';
  
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
@@ -51,7 +52,7 @@ const PeopleForm = () => {
   if (people || !isUpdate) {
     return (
       <Section>
-      <h2>{isUpdate ? 'Atualizar Pessoa' : 'Cadastrar Pessoa'}</h2>
+      <UserInfo tittle={isUpdate ? 'Atualizar Pessoa' : 'Cadastrar Pessoa'} />
       <NavBarLeft />
       <Card width="100%" height="600px">
       <Formik
