@@ -16,8 +16,9 @@ const Login = () => {
       login: '',
       senha: ''
     },
-    onSubmit: values => {
+    onSubmit: (values, {resetForm}) => {
       handleLogin(values)
+      resetForm()
     }
   })
 
