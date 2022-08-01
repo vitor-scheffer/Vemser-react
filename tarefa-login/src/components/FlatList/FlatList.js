@@ -64,9 +64,9 @@ const FlasList = ({list, setup}) => {
           {list.map(item =>(
             <Item key={item.idPessoa}>
               <TextSm onClick={() => {setDescription(item.idPessoa)}}>{item.nome}</TextSm>
-              <TextSm>{moment(item.dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY')}</TextSm>
-              <TextSm>{item.cpf}</TextSm>
-              <TextSm>{item.email}</TextSm>
+              <TextSm onClick={() => {setDescription(item.idPessoa)}}>{moment(item.dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY')}</TextSm>
+              <TextSm onClick={() => {setDescription(item.idPessoa)}}>{item.cpf}</TextSm>
+              <TextSm onClick={() => {setDescription(item.idPessoa)}}>{item.email}</TextSm>
               <div>
                 <Button width="80px" onClick={() => {handleUpdate(item.idPessoa)}}>Editar</Button>
                 <Button width="80px" onClick={() => {setDelete(item.idPessoa)}}>Apagar</Button>
