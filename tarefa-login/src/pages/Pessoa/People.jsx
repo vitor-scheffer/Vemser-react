@@ -8,6 +8,9 @@ import { Button } from '../../components/Button/Button'
 import { Section } from '../../components/Section/Section'
 import { ContainerPeople } from './People.styled';
 import { Tittle } from '../../components/Fonts/Fonts';
+import UserInfo from '../../components/UserInfo';
+
+
 const People = () => {
   const navigate = useNavigate()
   const [pessoas, setPessoas] = useState([])
@@ -32,9 +35,7 @@ const People = () => {
   return (
     <Section>
       <NavBarLeft />
-      <div>
-        <Tittle>Pessoas</Tittle>
-      </div>
+      <UserInfo tittle='Pessoas'/>
       <Card width="100%" height="100%">
       <ContainerPeople>
         <div>
