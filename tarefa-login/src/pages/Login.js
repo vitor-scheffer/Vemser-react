@@ -42,8 +42,8 @@ const Login = () => {
     <ContainerLogin>
       <Card height='582px' width='380px'>
         <Logo />
-        <Subtitle>Dashboard Kit</Subtitle>
-        <Tittle>Log In to Dashboard Kit</Tittle>
+        <Subtitle paddingBottom="32px">Dashboard Kit</Subtitle>
+        <Tittle paddingBottom="12px">Log In to Dashboard Kit</Tittle>
         <TextSm color={colorHoverMenu}>Enter your email and password below</TextSm>
         <form onSubmit={formik.handleSubmit}>
           <div>

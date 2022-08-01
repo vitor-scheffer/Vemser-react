@@ -1,14 +1,16 @@
 import styled from "styled-components"
 import { fontMd, fontLg, fontSm, fontXl, colorTittlePage, colorTittle, colorActiveMenu } from '../../consts'
 
-export const Tittle = styled.h1(({color}) => ({
+export const Tittle = styled.h1(({color, paddingBottom}) => ({
   fontSize: fontXl,
   color: color ? color : colorTittlePage,
+  paddingBottom: paddingBottom ? paddingBottom : ''
 }));
 
-export const Subtitle = styled.h2(({color}) => ({
+export const Subtitle = styled.h2(({color, paddingBottom}) => ({
   fontSize: fontLg,
   color: color ? color : colorTittle,
+  paddingBottom: paddingBottom ? paddingBottom : ''
 }));
 
 export const Text = styled.p(({color}) => ({
