@@ -31,24 +31,29 @@ const AuthProvider = ({children}) => {
       navigate('/pessoa')
       notify()
     } catch(error){
-      console.error(error)
+      const notifyError = () => toast(`${error ? error.response.data.message : 'Ocorreu um erro'}`);
+      notifyError()
     }
   }
 
   const handleLogout = () => {
     const notify = () => toast("Volte sempre!");
+    localStorage.removeItem('token')
     setToken()
     notify()
     navigate('/')
   }
 
   const handleSignUp = async (user) => {
+    console.log(user)
     try {
       await apiDBC.post('/auth/create', user)
-      alert('Usuário cadastrado com sucesso')
-      window.location.href = '/';
+      const notify = () => toast('Usuário cadastrado com sucesso');
+      notify()
+      navigate('/')
     } catch(error){
-      console.log(error)
+      const notifyError = () => toast(error);
+      notifyError()
     }
   }
 
