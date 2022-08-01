@@ -87,8 +87,6 @@ const Endereco = () => {
     }
   }
 
-  console.log(endereco)
-
   if((isUpdate && endereco) || !isUpdate) {
     return (
       <Section>

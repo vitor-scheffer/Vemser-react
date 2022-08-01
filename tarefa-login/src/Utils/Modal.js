@@ -2,7 +2,7 @@ import { ModalPeople } from './Modal.styled'
 import { Button } from '../components/Button/Button'
 import { redColor } from '../consts'
 
-const Modal = ({closeModal, confirmModal}) => {
+const Modal = ({name, closeModal, confirmModal}) => {
   return (
     
       <div className="modalBackground">
@@ -11,7 +11,7 @@ const Modal = ({closeModal, confirmModal}) => {
           <h1>Você tem certeza?</h1>
         </div>
         <div className="body">
-          <p>Se você deletar não será possível recuperar o usuário.</p>
+          <p>Se você deletar não será possível recuperar o {name ? name : 'usuário.'}</p>
         </div>
         <div className="btnsModal">
           <Button onClick={() => closeModal(false)} backgroundColor={redColor} border={`1px solid ${redColor}`}>Cancelar</Button>

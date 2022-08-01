@@ -10,10 +10,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment'
 import photo from '../images/no-user.jpeg'
+import Modal from './Modal'
 
 const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
   const [pessoa, setPessoa] = useState()
   const navigate = useNavigate()
+  const [openModal, setOpenModal] = useState(false)
+  const [idEndereco, setIdEndereco] = useState()
 
   const setup = async () => {
     try {
@@ -24,13 +27,22 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
     }
   }
 
+  const setDelete = (idEndereco) => {
+    setIdEndereco(idEndereco)
+    setOpenModal(true)
+  }
+
   useEffect(() => {
     setup()
   },[])
 
-  const handleDelete = async (idEndereco) => {
+  const handleDelete = async () => {
     const notify = () => toast("Endereço excluído com sucesso!");
-    await apiDBC.delete(`/endereco/${idEndereco}`)
+    try {
+      await apiDBC.delete(`/endereco/${idEndereco}`)
+    } catch (error) {
+      console.log(error)
+    }
     notify()
     close()
   }
@@ -81,8 +93,9 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
               <p><TextSm>{item.pais}</TextSm></p>
               <div className="btnsEdit btnsEditModal">
                 <Button width="150px" onClick={() =>{setUpdate(item.idEndereco)}}>Editar Endereço</Button>
-                <Button width="150px" onClick={() => {handleDelete(item.idEndereco)}}>Apagar Endereço</Button>
+                <Button width="150px" onClick={() => {setDelete(item.idEndereco)}}>Apagar Endereço</Button>
               </div>
+              {openModal && <Modal name="endereço."closeModal={setOpenModal} confirmModal={handleDelete}/>}
             </Item>
           )) : <h1>Ainda não existem endereços cadastrados.</h1>
           }
