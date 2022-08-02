@@ -19,6 +19,7 @@ const ModalDescription = ({close, setCadastro, setUpdate, id}) => {
   const [idEndereco, setIdEndereco] = useState()
 
   const setup = async () => {
+    console.log(id)
     try {
       const { data } = await apiDBC.get(`/pessoa/lista-completa?idPessoa=${id}`)
       setPessoa(data[0])

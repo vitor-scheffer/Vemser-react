@@ -71,15 +71,15 @@ const FlasList = ({list, setup}) => {
                 <Button width="80px" onClick={() => {handleUpdate(item.idPessoa)}}>Editar</Button>
                 <Button width="80px" onClick={() => {setDelete(item.idPessoa)}}>Apagar</Button>
               </div>
-              {openModal && <Modal closeModal={setOpenModal} confirmModal={handleDelete}/>}
+            </Item>
+          ))} 
+        </Lista>
+        {openModal && <Modal closeModal={setOpenModal} confirmModal={handleDelete}/>}
               {openDescription && <ModalDescription
               close={setOpenDescription}
               setCadastro={setCadastroEndereco}
               setUpdate={setUpdateEndereco}
-              id={id}/>}
-            </Item>
-          ))} 
-        </Lista>
+              id={id} />}
       </div>
   )
 }
