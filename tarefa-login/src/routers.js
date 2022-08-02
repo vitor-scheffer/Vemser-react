@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import Login from './pages/Login'
 import Users from './pages/Users'
 import Endereco from './pages/Endereco'
+import Contato from './pages/Contato'
 import People from './pages/Pessoa/People'
 import NotFound from './components/NotFound/NotFound'
 import PeopleForm from './pages/Pessoa/PeopleForm'
@@ -29,6 +30,8 @@ const Routers = () => {
             <Route path="/endereco" element={<Endereco />}></Route>
             <Route path="/endereco/:id" element={<Endereco />}></Route>
             <Route path="/endereco/:id/:idEndereco" element={<Endereco />}></Route>
+            <Route path="/contato/:id" element={<Contato />}></Route>
+            <Route path="/contato/:id/:idContato" element={<Contato />}></Route>
             <Route path="/pessoa" element={<People />}></Route>
             <Route path="/cadastro" element={<PeopleForm />}></Route>
             <Route path="/editar-cadastro/:id" element={<PeopleForm />}></Route>
