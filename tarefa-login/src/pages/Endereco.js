@@ -17,6 +17,7 @@ import { TextSm } from '../components/Fonts/Fonts'
 import { FormContentPeople } from '../components/FormPeople';
 import { BodyFormAddress } from '../components/FormAddress';
 import UserInfo from '../components/UserInfo';
+import {ErrorsAlert } from '../components/ErrorsAlert'
 
 const cepSchema = Yup.object().shape({
   tipo: Yup.string().required('Campo obrigatório.'),
@@ -117,7 +118,7 @@ const Endereco = () => {
               <BodyFormAddress>
               <div>
               <FormContentPeople>
-                <label htmlFor="cep"><TextSm color={colorHoverMenu} fontSize='12px'>CEP</TextSm></label>
+                <label htmlFor="cep"><TextSm color={colorHoverMenu} fontSize='12px'>CEP*</TextSm></label>
                 <Field
                 name="cep"
                 render= {({field}) => (
@@ -130,12 +131,12 @@ const Endereco = () => {
                   )}
                 />
                 {errors.cep && touched.cep ? (
-               <div>{errors.cep}</div>
+               <ErrorsAlert>{errors.cep}</ErrorsAlert>
                 ) : null}
               </FormContentPeople>
   
               <FormContentPeople>
-                <label htmlFor="tipo"><TextSm color={colorHoverMenu} fontSize='12px'>TIPO</TextSm></label>
+                <label htmlFor="tipo"><TextSm color={colorHoverMenu} fontSize='12px'>TIPO*</TextSm></label>
                 <Field
                 component="select"
                 id="tipo"
@@ -146,64 +147,64 @@ const Endereco = () => {
                <option value="COMERCIAL">Comercial</option>
                </Field>
                 {errors.tipo && touched.tipo ? (
-               <div>{errors.tipo}</div>
+               <ErrorsAlert>{errors.tipo}</ErrorsAlert>
              ) : null}
               </FormContentPeople>
               
               <FormContentPeople>
-                <label htmlFor="logradouro"><TextSm color={colorHoverMenu} fontSize='12px'>RUA</TextSm></label>
+                <label htmlFor="logradouro"><TextSm color={colorHoverMenu} fontSize='12px'>RUA*</TextSm></label>
                 <Field
                 id="logradouro"
                 name="logradouro"
                 />
                 {errors.logradouro && touched.logradouro ? (
-               <div>{errors.logradouro}</div>
+               <ErrorsAlert>{errors.logradouro}</ErrorsAlert>
              ) : null}
               </FormContentPeople>
               
               <FormContentPeople>
-                <label htmlFor="numero"><TextSm color={colorHoverMenu} fontSize='12px'>NÚMERO</TextSm></label>
+                <label htmlFor="numero"><TextSm color={colorHoverMenu} fontSize='12px'>NÚMERO*</TextSm></label>
                 <Field
                 id="numero"
                 name="numero"
                 />
                 {errors.numero && touched.numero ? (
-               <div>{errors.numero}</div>
+               <ErrorsAlert>{errors.numero}</ErrorsAlert>
              ) : null}
               </FormContentPeople>
               </div>
               
               <div>
               <FormContentPeople>
-                <label htmlFor="cidade"><TextSm color={colorHoverMenu} fontSize='12px'>CIDADE</TextSm></label>
+                <label htmlFor="cidade"><TextSm color={colorHoverMenu} fontSize='12px'>CIDADE*</TextSm></label>
                 <Field
                 id="cidade"
                 name="cidade"
                 />
                 {errors.cidade && touched.cidade ? (
-               <div>{errors.cidade}</div>
+               <ErrorsAlert>{errors.cidade}</ErrorsAlert>
              ) : null}
               </FormContentPeople>
               
               <FormContentPeople>
-                <label htmlFor="estado"><TextSm color={colorHoverMenu} fontSize='12px'>ESTADO</TextSm></label>
+                <label htmlFor="estado"><TextSm color={colorHoverMenu} fontSize='12px'>ESTADO*</TextSm></label>
                 <Field
                 id="estado"
                 name="estado"
                 />
                 {errors.estado && touched.estado ? (
-               <div>{errors.estado}</div>
+               <ErrorsAlert>{errors.estado}</ErrorsAlert>
              ) : null}
               </FormContentPeople>
               
               <FormContentPeople>
-                <label htmlFor="pais"><TextSm color={colorHoverMenu} fontSize='12px'>PAÍS</TextSm></label>
+                <label htmlFor="pais"><TextSm color={colorHoverMenu} fontSize='12px'>PAÍS*</TextSm></label>
                 <Field
                 id="pais"
                 name="pais"
                 />
                 {errors.pais && touched.pais ? (
-               <div>{errors.pais}</div>
+               <ErrorsAlert>{errors.pais}</ErrorsAlert>
              ) : null}
               </FormContentPeople>
               

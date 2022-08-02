@@ -16,6 +16,7 @@ import { colorHoverMenu } from '../../consts'
 import { TextSm } from '../../components/Fonts/Fonts'
 import { FormContentPeople } from '../../components/FormPeople';
 import UserInfo from '../../components/UserInfo';
+import { ErrorsAlert } from '../../components/ErrorsAlert'
  
 const PeopleForm = () => {
   const { handleRegister } = useContext(PeopleContext)
@@ -73,14 +74,14 @@ const PeopleForm = () => {
           {({errors, touched, handleSubmit }) =>(
             <Form className="formPeople" onSubmit={handleSubmit}>
             <FormContentPeople>
-              <label htmlFor="nome"><TextSm color={colorHoverMenu} fontSize='12px'>NOME</TextSm></label>
+              <label htmlFor="nome"><TextSm color={colorHoverMenu} fontSize='12px'>NOME*</TextSm></label>
               <Field id="nome" name="nome"/>
               {errors.nome && touched.nome ? (
-             <div>{errors.nome}</div>
+             <ErrorsAlert>{errors.nome}</ErrorsAlert>
            ) : null}
             </FormContentPeople>
             <FormContentPeople>
-              <label htmlFor="dataNascimento"><TextSm color={colorHoverMenu} fontSize='12px'>DATA DE NASCIMENTO</TextSm></label>
+              <label htmlFor="dataNascimento"><TextSm color={colorHoverMenu} fontSize='12px'>DATA DE NASCIMENTO*</TextSm></label>
               <Field
               name="dataNascimento"
               render= {({field}) => (
@@ -92,11 +93,11 @@ const PeopleForm = () => {
                 )}
               />
                 {errors.dataNascimento && touched.dataNascimento ? (
-             <div>{errors.dataNascimento}</div>
+             <ErrorsAlert>{errors.dataNascimento}</ErrorsAlert>
            ) : null}
             </FormContentPeople>
             <FormContentPeople>
-              <label htmlFor="cpf"><TextSm color={colorHoverMenu} fontSize='12px'>CPF</TextSm></label>
+              <label htmlFor="cpf"><TextSm color={colorHoverMenu} fontSize='12px'>CPF*</TextSm></label>
               <Field
               name="cpf"
               render= {({field}) => (
@@ -108,14 +109,14 @@ const PeopleForm = () => {
                 )}
               />
                 {errors.cpf && touched.cpf ? (
-             <div>{errors.cpf}</div>
+             <ErrorsAlert>{errors.cpf}</ErrorsAlert>
            ) : null}
             </FormContentPeople>
             <FormContentPeople>
-              <label htmlFor="email"><TextSm color={colorHoverMenu} fontSize='12px'>EMAIL</TextSm></label>
+              <label htmlFor="email"><TextSm color={colorHoverMenu} fontSize='12px'>EMAIL*</TextSm></label>
               <Field id="email" name="email"/>
               {errors.email && touched.email ? (
-             <div>{errors.email}</div>
+             <ErrorsAlert>{errors.email}</ErrorsAlert>
            ) : null}
             </FormContentPeople>
             <Button disabled={errors.email || errors.cpf || errors.dataNascimento || errors.nome} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</Button>

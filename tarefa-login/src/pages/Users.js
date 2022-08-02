@@ -6,6 +6,7 @@ import { Card } from '../components/Card/Card'
 import { Button } from '../components/Button/Button'
 import { Subtitle, Tittle, TextSm } from '../components/Fonts/Fonts'
 import {colorHoverMenu} from '../consts'
+import { ErrorsAlert } from '../components/ErrorsAlert'
 
 const validate = values => {
   const errors = {};
@@ -48,7 +49,7 @@ const Users = () => {
           onChange={formik.handleChange}
           value={formik.values.login}
           />
-          {formik.errors.login ? <div>{formik.errors.login}</div> : null}
+          {formik.errors.login ? <ErrorsAlert>{formik.errors.login}</ErrorsAlert> : null}
         </div>
         
         <div>
@@ -59,7 +60,7 @@ const Users = () => {
           onChange={formik.handleChange}
           value={formik.values.senha}
           />
-          {formik.errors.senha ? <div>{formik.errors.senha}</div> : null}
+          {formik.errors.senha ? <ErrorsAlert>{formik.errors.senha}</ErrorsAlert> : null}
         </div>
         <Button type="submit" onSubmit={formik.onSubmit}>Cadastrar</Button>
       </form>

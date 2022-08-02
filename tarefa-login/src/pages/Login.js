@@ -9,6 +9,7 @@ import { Subtitle, Tittle, TextSm } from '../components/Fonts/Fonts'
 import { Card } from '../components/Card/Card'
 import { colorHoverMenu, colorPrimary } from '../consts'
 import { Button } from '../components/Button/Button'
+import { ErrorsAlert } from '../components/ErrorsAlert'
 
 const validate = values => {
   const errors = {};
@@ -54,7 +55,7 @@ const Login = () => {
             onChange={formik.handleChange}
             value={formik.values.login}
           />
-          {formik.errors.login ? <div>{formik.errors.login}</div> : null}
+          {formik.errors.login ? <ErrorsAlert>{formik.errors.login}</ErrorsAlert> : null}
           </div>
           <div>
           <label htmlFor="senha"><TextSm color={colorHoverMenu} fontSize='12px'>PASSWORD</TextSm></label>
@@ -65,7 +66,7 @@ const Login = () => {
             onChange={formik.handleChange}
             value={formik.values.senha}
           />
-          {formik.errors.senha ? <div>{formik.errors.senha}</div> : null}
+          {formik.errors.senha ? <ErrorsAlert>{formik.errors.senha}</ErrorsAlert> : null}
           </div>
           <Button width='100%'>Log In</Button>     
         </form>
