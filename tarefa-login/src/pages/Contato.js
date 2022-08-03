@@ -33,8 +33,8 @@ const Contato = () => {
     if( id && idContato) {
       setIsUpdate(true)
       try {
-        const { data } = await apiDBC.get(`/contato/${idContato}`)
-        setContato(data)
+        const { data } = await apiDBC.get(`/contato/${id}`)
+        setContato(data.find(item => item.idContato === parseInt(idContato)))
       } catch (error) {
         console.log(error)
       }
@@ -44,6 +44,8 @@ const Contato = () => {
   useEffect(()=> {
     setup()
   },[])
+
+  
   
   const handleRegister = async (values) => {
     const notify = () => toast("Contato cadastrado com sucesso!");
@@ -83,6 +85,7 @@ const Contato = () => {
           validationSchema={contactSchema}
           onSubmit={(values, {resetForm}) => {  
             values.idPessoa = parseInt(values.idPessoa)   
+
             {isUpdate ? handleUpdate(values) : handleRegister(values)}
             resetForm()
           }}
@@ -116,7 +119,7 @@ const Contato = () => {
                 >
                <option value={null}>Escolha um tipo</option>
                <option value="RESIDENCIAL">Residencial</option>
-               <option value="CELULAR">Celular</option>
+               <option value="COMERCIAL">Comercial</option>
                </Field>
                 {errors.tipoContato && touched.tipoContato ? (
                <ErrorsAlert>{errors.tipoContato}</ErrorsAlert>
