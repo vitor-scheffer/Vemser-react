@@ -47,8 +47,6 @@ const ModalContacts = ({close, setCadastro, setUpdate, id}) => {
     close()
   }
 
-  console.log(pessoa)
-
   if(pessoa) {
     return (
       
@@ -82,7 +80,7 @@ const ModalContacts = ({close, setCadastro, setUpdate, id}) => {
             <Item key={item.idContato}>
               <p><TextSm>{item.tipoContato}</TextSm></p>
               <p><TextSm>{item.telefone}</TextSm></p>
-              <p><TextSm>{item.descrição}</TextSm></p>
+              <p><TextSm>{item.descricao}</TextSm></p>
               <div className="btnsEdit btnsEditModal">
                 <Button width="150px" onClick={() =>{setUpdate(item.idContato)}}>Editar Contato</Button>
                 <Button width="150px" onClick={() => {setDelete(item.idContato)}}>Apagar Contato</Button>

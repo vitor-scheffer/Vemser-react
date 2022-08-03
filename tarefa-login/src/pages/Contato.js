@@ -19,7 +19,7 @@ import {ErrorsAlert } from '../components/ErrorsAlert'
 const contactSchema = Yup.object().shape({
   tipoContato: Yup.string().required('Campo obrigatório.'),
   telefone: Yup.string().required('Campo obrigatório.'),
-  descricao: Yup.string().required('Campo obrigatório.'),
+  descricao: Yup.string()
 })
 
 const Contato = () => {
@@ -45,6 +45,7 @@ const Contato = () => {
     setup()
   },[])
 
+  console.log(contato)
   
   
   const handleRegister = async (values) => {

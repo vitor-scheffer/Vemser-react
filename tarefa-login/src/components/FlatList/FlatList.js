@@ -73,7 +73,6 @@ const FlasList = ({list, setup}) => {
         <TitleList>
           <TextSm color={colorHoverMenu}>Nome</TextSm>
           <TextSm color={colorHoverMenu}>Data de Nascimento</TextSm>
-          <TextSm color={colorHoverMenu}>CPF</TextSm>
           <TextSm color={colorHoverMenu}>Email</TextSm>
         </TitleList>
         <Lista>
