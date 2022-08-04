@@ -1,8 +1,9 @@
 Projeto Principal: CRUD de site de cadastro de colaboradores.
 
 <a href="https://tarefa-crud.vercel.app/" target="_blank">
-  <img src="https://user-images.githubusercontent.com/103120313/181872853-9476297f-d31e-4fc4-a7b7-83dd40e3709f.png"></img>
+  <img src="https://user-images.githubusercontent.com/103120313/182930955-e83ad8ae-b32b-4a17-ac89-9eee0b180a67.png"></img>
 </a>
+
 <br>
 O site pode ser acessado em: https://tarefa-crud.vercel.app/ <br>
 <br>
